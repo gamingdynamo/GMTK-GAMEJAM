@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -8,10 +9,9 @@ public class InputHandler : MonoBehaviour
 {
     PlayerInputs playerInputs;
     public static InputHandler Instance;
-    /// <summary>
+    /*/// <summary>
     /// if jump is being pressed
     /// </summary>
-    public bool Jump;
     /// <summary>
     /// MouseButton0
     /// </summary>
@@ -20,8 +20,8 @@ public class InputHandler : MonoBehaviour
     /// <summary>
     /// ScreenSpace
     /// </summary>
+    /// */
     public Vector2 mousePosition;
-    // Start is called before the first frame update
     void Awake()
     {   
         if(Instance == null)
@@ -29,10 +29,11 @@ public class InputHandler : MonoBehaviour
             Instance = this;
         }
         playerInputs = new PlayerInputs();
-        playerInputs.Player.Jump.started += context => { Jump = true; };
-        playerInputs.Player.Jump.canceled += context => { Jump = false; };
-        playerInputs.Player.Tongue.started += context => { TongueOut = true;  };
-        playerInputs.Player.Tongue.canceled += context => { TongueOut = false; };
+        playerInputs.Player.Jump.started += context => Jump();
+        playerInputs.Player.Jump.canceled += context => JumpCancel();
+        playerInputs.Player.Tongue.started += context => ShootTongue();
+        //If we want grapple or pull with tongue maybe we need this. I Just comment it for now.
+        //playerInputs.Player.Tongue.canceled += context => { TongueOut = false; };
         playerInputs.Player.Move.performed += context => Move(context);
         playerInputs.Player.Move.canceled += context => Move(context);
 
@@ -42,14 +43,31 @@ public class InputHandler : MonoBehaviour
 
     private void Move(InputAction.CallbackContext context)
     {
-        moveDirNormalized = context.ReadValue<Vector2>();
-        moveDirNormalized.Normalize();
+        FrogBehaviour.Instance.FrogWalkStart(context.ReadValue<Vector2>().normalized);
     }
+
+    private void Jump()
+    {
+        FrogBehaviour.Instance.Jump();
+    }
+
+    private void JumpCancel()
+    {
+        FrogBehaviour.Instance.JumpStop();
+    }
+
+    private void ShootTongue()
+    {
+        FrogBehaviour.Instance.ShootTongue();
+    }
+
 
     // Update is called once per frame
     void Update()
     {
         mousePosition = Input.mousePosition;
+        //Update FrogTongue Aimming Direction
+        //FrogBehaviour.Instance.UpdateAimPosition(CameraForwardDirection)
     }
 
 

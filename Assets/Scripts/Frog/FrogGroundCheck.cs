@@ -4,14 +4,17 @@ using UnityEngine;
 
 public class FrogGroundCheck : MonoBehaviour
 {
+    [SerializeField]
+    private FrogBehaviour frogBehave;
+
     private int onGround = 0;
-    public int OnGround { get { return onGround; } }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Ground"))
         {
             onGround++;
+            frogBehave.FrogOnGround(true);
         }
     }
 
@@ -20,6 +23,10 @@ public class FrogGroundCheck : MonoBehaviour
         if (other.CompareTag("Ground"))
         {
             onGround--;
+            if (onGround <= 0)
+            {
+                frogBehave.FrogOnGround(false);
+            }
         }
     }
 }
