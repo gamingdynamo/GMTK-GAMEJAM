@@ -26,10 +26,6 @@ public class FrogBehaviour : MonoBehaviour
 
     private void FixedUpdate()
     {
-        /*Vector2 inputVector = Vector2.zero;
-        inputVector.x = Input.GetAxisRaw("Horizontal");
-        inputVector.y = Input.GetAxisRaw("Vertical");
-        inputVector.Normalize();*/
         if (InputHandler.Instance.moveDirNormalized != Vector2.zero && frogCurrWalkState == FrogWalkState.Resting)
         {
             FrogWalkStart(InputHandler.Instance.moveDirNormalized);
