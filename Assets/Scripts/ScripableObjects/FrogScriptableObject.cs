@@ -12,6 +12,10 @@ public class FrogScriptableObject : ScriptableObject
     public float FrogWalkCoolDown = 0.3f;
 
     [Header("Frog Jump")]
-    public float FrogJumpCoyoteTime = 0.05f;
-
+    public float FrogJumpLeaveGroundCoyoteTime = 0.05f;
+    public float FrogJumpInputCoyoteTime = 0.05f;
+    public float FrogMaxJumpTime = 1.0f;
+    public float FrogJumpVerticleVelocity = 5.0f;
+    public float FrogJumpForwardVelocity = 3.0f;
+    public float FrogJumpFallControlVelocity = 0.1f;
 }

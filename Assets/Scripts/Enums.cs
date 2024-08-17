@@ -1,7 +1,7 @@
 enum FrogWalkState
 {
     Resting,
-    Jumping,
+    Walking,
     CoolDown,
     EndOfEnum,
 }
