@@ -82,8 +82,7 @@ public class FrogBehaviour : MonoBehaviour
             frogCurrWalkState++;
             frogWalkTimer = 0.0f;
             frogWalkPastTime = 0.0f;
-            //frogAnmt.speed = frogScripObj.FrogHopAnimationSpeed;
-            //frogAnmt.SetTrigger("Hop");
+            PlayAnimation("Hop", frogScripObj.FrogHopAnimationSpeed);
         }
         else
         {
@@ -214,5 +213,11 @@ public class FrogBehaviour : MonoBehaviour
     public void UpdateAimPosition(Vector3 cameraForward)
     {
 
+    }
+
+    private void PlayAnimation(string parm, float playSpeed)
+    {
+        frogAnmt.speed = playSpeed;
+        frogAnmt.SetTrigger(parm);
     }
 }
