@@ -16,6 +16,7 @@ MonoBehaviour:
   FrogWalkDistance: 0.5
   FrogWalkTimeInterval: 0.2
   FrogWalkCoolDown: 0.2
+  FrogHopAnimationSpeed: 1
   FrogJumpLeaveGroundCoyoteTime: 0.05
   FrogJumpInputCoyoteTime: 0.05
   FrogMaxJumpTime: 0.3
