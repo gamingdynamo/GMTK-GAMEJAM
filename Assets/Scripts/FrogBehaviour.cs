@@ -26,13 +26,13 @@ public class FrogBehaviour : MonoBehaviour
 
     private void FixedUpdate()
     {
-        Vector2 inputVector = Vector2.zero;
+        /*Vector2 inputVector = Vector2.zero;
         inputVector.x = Input.GetAxisRaw("Horizontal");
         inputVector.y = Input.GetAxisRaw("Vertical");
-        inputVector.Normalize();
-        if (inputVector != Vector2.zero && frogCurrWalkState == FrogWalkState.Resting)
+        inputVector.Normalize();*/
+        if (InputHandler.Instance.moveDirNormalized != Vector2.zero && frogCurrWalkState == FrogWalkState.Resting)
         {
-            FrogWalkStart(inputVector);
+            FrogWalkStart(InputHandler.Instance.moveDirNormalized);
         }
         if (frogCurrWalkState == FrogWalkState.Jumping)
         {
