@@ -1,14 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEditor.Searcher.SearcherWindow.Alignment;
 
 public class FrogBehaviour : MonoBehaviour
 {
+    public static FrogBehaviour Instance { get; private set; }
+
     [SerializeField]
     private FrogScriptableObject frogScripObj;
     [SerializeField]
     private Rigidbody frogRig;
+    [SerializeField]
+    private FrogGroundCheck frogGroundCheck;
 
     private float WalkFormulaA = 0.0f;
     private float WalkFormulaC = 0.0f;
@@ -20,13 +23,26 @@ public class FrogBehaviour : MonoBehaviour
 
     private void Start()
     {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Debug.Log("ERROR: Frog Singleton Already Exsist");
+            Destroy(gameObject);
+            return;
+        }
+
         WalkFormulaA = frogScripObj.FrogWalkHeight / (frogScripObj.FrogWalkDistance * frogScripObj.FrogWalkDistance * 0.25f);
         WalkFormulaC = frogScripObj.FrogWalkHeight;
     }
 
     private void FixedUpdate()
     {
-        if (InputHandler.Instance.moveDirNormalized != Vector2.zero && frogCurrWalkState == FrogWalkState.Resting)
+        if (InputHandler.Instance.moveDirNormalized != Vector2.zero 
+            && frogCurrWalkState == FrogWalkState.Resting
+            && frogGroundCheck.OnGround > 0)
         {
             FrogWalkStart(InputHandler.Instance.moveDirNormalized);
         }
@@ -36,6 +52,7 @@ public class FrogBehaviour : MonoBehaviour
         }
     }
 
+    //Called by inputhandler Move
     public void FrogWalkStart(Vector2 inputVector)
     {
         frogWalkDirection = new Vector3(inputVector.x, 0.0f, inputVector.y);
@@ -57,6 +74,31 @@ public class FrogBehaviour : MonoBehaviour
             frogCurrWalkState++;
             Invoke(nameof(FrogWalkCoolDown), frogScripObj.FrogWalkCoolDown);
         }
+    }
+
+    //Called by InputHandler when jump is pressed
+    public void Jump()
+    {
+
+    }
+
+    //Called by InputHandler when jump is released
+    public void JumpStop()
+    {
+
+    }
+
+
+    //Called by InputHandler when Tongue is pressed
+    public void ShootTongue()
+    {
+
+    }
+
+    //Called by InputHandler when mouse is moved
+    public void UpdateAimPosition(Vector3 cameraForward)
+    {
+
     }
 
     private void ApplyFrogWalkMovement()
