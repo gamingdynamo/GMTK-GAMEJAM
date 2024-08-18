@@ -47,7 +47,11 @@ public class FrogBehaviour : MonoBehaviour
 
     private void Start()
     {
-
+        //Put at a better place later
+        Cursor.lockState = CursorLockMode.Confined;
+        Cursor.visible = false;
+        ////////////////////////////////////
+        
         if (Instance == null)
         {
             Instance = this;
