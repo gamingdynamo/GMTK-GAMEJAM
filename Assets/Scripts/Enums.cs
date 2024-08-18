@@ -3,5 +3,14 @@ enum FrogWalkState
     Resting,
     Walking,
     CoolDown,
-    EndOfEnum,
+    EndOfEnum
+}
+
+enum FrogTongueState
+{
+    Resting,
+    Shooting,
+    Holding,
+    Retrieving,
+    EndOfEnum
 }

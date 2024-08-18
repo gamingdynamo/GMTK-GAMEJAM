@@ -18,9 +18,15 @@ MonoBehaviour:
   FrogWalkCoolDown: 0.2
   FrogJumpLeaveGroundCoyoteTime: 0.05
   FrogJumpInputCoyoteTime: 0.05
-  FrogMaxJumpTime: 0.3
+  FrogMaxJumpTime: 0.5
   FrogJumpVerticleVelocity: 5
   FrogJumpForwardVelocity: 3
   FrogJumpFallControlVelocity: 1
+  FrogTongueAimDistance: 7
+  FrogTongueMaxLength: 5
+  FrogTongueShootTime: 0.2
+  FrogTongueHoldTime: 0.1
+  FrogTongueRetrieveTime: 0.2
+  FrogTongueRadiusScale: 0.01
   FrogHopAnimationSpeed: 2
   FrogJumpAnimationSpeed: 1

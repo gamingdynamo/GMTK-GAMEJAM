@@ -21,10 +21,11 @@ public class FrogScriptableObject : ScriptableObject
 
     [Header("Frog Tongue")]
     public float FrogTongueAimDistance = 50.0f;
-    public float FrogTongueLength = 5.0f;
+    public float FrogTongueMaxLength = 5.0f;
     public float FrogTongueShootTime = 0.2f;
     public float FrogTongueHoldTime = 0.1f;
     public float FrogTongueRetrieveTime = 0.2f;
+    public float FrogTongueRadiusScale = 0.1f;
 
     [Header("Frog Animation")]
     public float FrogHopAnimationSpeed = 2.0f;

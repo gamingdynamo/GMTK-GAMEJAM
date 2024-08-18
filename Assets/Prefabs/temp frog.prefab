@@ -281,7 +281,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 80
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!114 &748379430159380902
 MonoBehaviour:
@@ -298,3 +298,4 @@ MonoBehaviour:
   frogScripObj: {fileID: 11400000, guid: 0ebe72fcd7437b74f828a52aecaccd64, type: 2}
   frogRig: {fileID: 8135037106494031694}
   frogAnmt: {fileID: 8123900920286344283}
+  frogTongue: {fileID: 0}

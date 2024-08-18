@@ -40,7 +40,6 @@ public class FreeCam : MonoBehaviour
 
         if (FrogBehaviour.Instance != null) 
         {
-            FrogBehaviour.Instance.UpdateAimPosition(cameraTrans.forward);
             transform.position = FrogBehaviour.Instance.transform.position;
         }
            
