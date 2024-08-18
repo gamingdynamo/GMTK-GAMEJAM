@@ -28,5 +28,7 @@ MonoBehaviour:
   FrogTongueHoldTime: 0.1
   FrogTongueRetrieveTime: 0.2
   FrogTongueRadiusScale: 0.01
+  AimAssistAngle: 15
+  AimAssistColliderNumber: 8
   FrogHopAnimationSpeed: 2
   FrogJumpAnimationSpeed: 1

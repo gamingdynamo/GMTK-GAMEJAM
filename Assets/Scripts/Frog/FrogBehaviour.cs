@@ -15,6 +15,8 @@ public class FrogBehaviour : MonoBehaviour
     private Animator frogAnmt;
     [SerializeField]
     private TongueBehaviour frogTongue;
+    [SerializeField]
+    private FrogTongueAssist aimAssist;
 
     private Transform cameraTrans;
     public Transform CameraTrans { get { 
@@ -59,10 +61,12 @@ public class FrogBehaviour : MonoBehaviour
 
         WalkFormulaA = frogScripObj.FrogWalkHeight / (frogScripObj.FrogWalkDistance * frogScripObj.FrogWalkDistance * 0.25f);
         WalkFormulaC = frogScripObj.FrogWalkHeight;
+        aimAssist.InitBoxColliders();
     }
 
     private void FixedUpdate()
     {
+        aimAssist.SetAimAssistRotation((AimPosition() - transform.position).normalized);
         FrogFixedUpdate();
     }
 
@@ -244,15 +248,22 @@ public class FrogBehaviour : MonoBehaviour
         shootingTongue = true;
         frogAnmt.SetBool("Shooting", true);
         Invoke(nameof(TongueShotFinish), (frogScripObj.FrogTongueShootTime + frogScripObj.FrogTongueHoldTime + frogScripObj.FrogTongueRetrieveTime));
-        frogTongue.ShootTongue(FrogScripObj.FrogTongueAimDistance * CameraTrans.forward + CameraTrans.position);
-        /*if (Locked to some target)
+        //frogTongue.ShootTongue(AimPosition());
+        Tonguable target = aimAssist.LockInTarget();
+        if (target != null)
         {
-            frogTongue.ShootTongue(targetTransform);
+            target.GotTongued();
+            frogTongue.ShootTongue(target);
         }
         else
         {
-            frogTongue.ShootTongue(FrogScripObj.FrogTongueAimDistance * CameraTrans.forward + CameraTrans.position);
-        }*/
+            frogTongue.ShootTongue(AimPosition());
+        }
+    }
+
+    private Vector3 AimPosition()
+    {
+        return FrogScripObj.FrogTongueAimDistance * CameraTrans.forward + CameraTrans.position;
     }
 
     public void TongueShotFinish()

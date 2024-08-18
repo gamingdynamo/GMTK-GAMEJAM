@@ -27,6 +27,10 @@ public class FrogScriptableObject : ScriptableObject
     public float FrogTongueRetrieveTime = 0.2f;
     public float FrogTongueRadiusScale = 0.1f;
 
+    [Header("Aim Assist")]
+    public float AimAssistAngle = 15.0f;
+    public int AimAssistColliderNumber = 3;
+
     [Header("Frog Animation")]
     public float FrogHopAnimationSpeed = 2.0f;
     public float FrogJumpAnimationSpeed = 0.5f;
