@@ -64,12 +64,12 @@ public class FrogBehaviour : MonoBehaviour
     private void FrogFaceDirection(Vector2 dir)
     {
         if (dir ==  Vector2.zero) { return; }
-        transform.rotation = Quaternion.Euler(0.0f, VectorToAngle(dir), 0.0f);
+        transform.rotation = Quaternion.Euler(0.0f, 180.0f + VectorToAngle(dir), 0.0f);
     }
 
     private float VectorToAngle(Vector2 dir)
     {
-        return Vector2.Angle(Vector2.up, dir);
+        return (dir.x < 0.0f ? -1.0f : 1.0f) * Vector2.Angle(Vector2.up, dir);
     }
 
     private Vector2 AngleToVector(float angle)
@@ -224,17 +224,12 @@ public class FrogBehaviour : MonoBehaviour
     //Called by InputHandler when mouse is moved
     public void UpdateAimPosition(Vector3 cameraForward)
     {
-
-    }
-
-    public void SetCamerForwardVector(Vector3 cameraForward)
-    {
         this.cameraForward = cameraForward;
     }
 
     private Vector2 CameraInputDirection()
     {
-        return AngleToVector(VectorToAngle(cameraForward) + VectorToAngle(inputDirection));
+        return AngleToVector(VectorToAngle(new Vector2(cameraForward.x, cameraForward.z)) + VectorToAngle(inputDirection));
     }
 
     private void PlayAnimation(string parm, float playSpeed)

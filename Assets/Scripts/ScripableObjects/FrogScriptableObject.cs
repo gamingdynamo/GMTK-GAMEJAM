@@ -19,6 +19,13 @@ public class FrogScriptableObject : ScriptableObject
     public float FrogJumpForwardVelocity = 3.0f;
     public float FrogJumpFallControlVelocity = 0.1f;
 
+    [Header("Frog Tongue")]
+    public float FrogTongueAimDistance = 50.0f;
+    public float FrogTongueLength = 5.0f;
+    public float FrogTongueShootTime = 0.2f;
+    public float FrogTongueHoldTime = 0.1f;
+    public float FrogTongueRetrieveTime = 0.2f;
+
     [Header("Frog Animation")]
     public float FrogHopAnimationSpeed = 2.0f;
     public float FrogJumpAnimationSpeed = 0.5f;
