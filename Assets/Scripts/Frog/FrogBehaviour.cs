@@ -190,7 +190,6 @@ public class FrogBehaviour : MonoBehaviour
     {
         jumpInputTimer = frogScripObj.FrogJumpInputCoyoteTime;
         if (!frogOnGround && leaveGroundTimer <= 0.0f) { return; }
-        if (shootingTongue) { return; }
         JumpAction();
     }
 
@@ -243,12 +242,11 @@ public class FrogBehaviour : MonoBehaviour
     //Called by InputHandler when Tongue is pressed
     public void ShootTongue()
     {
-        if (!frogOnGround || frogWalkDirection != Vector3.zero || !frogRig.useGravity || shootingTongue) { return; }
+        if (frogWalkDirection != Vector3.zero || shootingTongue) { return; }
         FrogFaceDirection(new Vector2(CameraTrans.forward.x, CameraTrans.forward.z));
         shootingTongue = true;
         frogAnmt.SetBool("Shooting", true);
         Invoke(nameof(TongueShotFinish), (frogScripObj.FrogTongueShootTime + frogScripObj.FrogTongueHoldTime + frogScripObj.FrogTongueRetrieveTime));
-        //frogTongue.ShootTongue(AimPosition());
         Tonguable target = aimAssist.LockInTarget();
         if (target != null)
         {
@@ -261,7 +259,7 @@ public class FrogBehaviour : MonoBehaviour
         }
     }
 
-    private Vector3 AimPosition()
+    public Vector3 AimPosition()
     {
         return FrogScripObj.FrogTongueAimDistance * CameraTrans.forward + CameraTrans.position;
     }
@@ -269,7 +267,7 @@ public class FrogBehaviour : MonoBehaviour
     public void TongueShotFinish()
     {
         shootingTongue = false;
-        frogAnmt.SetBool("Shooting", false);
+        //frogAnmt.SetBool("Shooting", false);
     }
 
     private Vector2 CameraInputDirection()

@@ -13,12 +13,14 @@ public class FrogTongueAssist : MonoBehaviour
         if (!other.CompareTag("Tonguable")) { return; }
         if (closestTarget == null)
         {
+            Debug.Log("Closest Add: " + other.name);
             closestTarget = other.transform;
         }
         else
         {
             if (Vector3.Angle(transform.forward, other.transform.position - transform.position) < Vector3.Angle(transform.forward, closestTarget.position - transform.position))
             {
+                Debug.Log("Closest Change: " + other.name);
                 closestTarget = other.transform;
             }
         }
@@ -58,6 +60,6 @@ public class FrogTongueAssist : MonoBehaviour
     private bool InAngles(Transform trans)
     {
         if (trans == null) { return false; }
-        return Vector3.Angle(transform.forward, trans.position - transform.position) <= FrogBehaviour.Instance.FrogScripObj.AimAssistAngle * 0.5f;
+        return Vector3.Angle(FrogBehaviour.Instance.AimPosition() - transform.position, trans.position - transform.position) <= FrogBehaviour.Instance.FrogScripObj.AimAssistAngle * 0.5f;
     }
 }
