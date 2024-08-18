@@ -31,6 +31,7 @@ public class FrogBehaviour : MonoBehaviour
 
     private void Start()
     {
+
         if (Instance == null)
         {
             Instance = this;
@@ -179,9 +180,12 @@ public class FrogBehaviour : MonoBehaviour
         Invoke(nameof(FrogWalkCoolDown), frogScripObj.FrogWalkCoolDown);
         jumpInputTimer = 0.0f;
         jumpTimer = frogScripObj.FrogMaxJumpTime;
-        jumpDirection = CameraInputDirection();
+        jumpDirection = inputDirection == Vector2.zero ? Vector2.zero : CameraInputDirection();
         frogRig.useGravity = false;
-        FrogFaceDirection(CameraInputDirection());
+        if (inputDirection != Vector2.zero)
+        {
+            FrogFaceDirection(CameraInputDirection());
+        }
     }
 
     private void JumpUpdate()

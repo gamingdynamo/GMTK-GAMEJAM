@@ -2,12 +2,19 @@ using UnityEngine;
 
 public class FreeCam : MonoBehaviour
 {
+    private Transform cameraTrans;
+
     public float movementSpeed = 10f;
     public float fastSpeedMultiplier = 5f;
     public float mouseSensitivity = 2f;
 
     private float yaw = 0f;
     private float pitch = 0f;
+
+    private void Start()
+    {
+        cameraTrans = Camera.main.transform;
+    }
 
     void Update()
     {
@@ -33,7 +40,7 @@ public class FreeCam : MonoBehaviour
 
         if (FrogBehaviour.Instance != null) 
         {
-            FrogBehaviour.Instance.UpdateAimPosition(transform.forward);
+            FrogBehaviour.Instance.UpdateAimPosition(cameraTrans.forward);
             transform.position = FrogBehaviour.Instance.transform.position;
         }
            
