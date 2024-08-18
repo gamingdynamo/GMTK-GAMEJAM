@@ -12,8 +12,8 @@ public class FrogTongueAssist : MonoBehaviour
     {
         if (other.CompareTag("Tonguable"))
         {
+            if (targets.Contains(other.transform)) { return; }
             targets.Add(other.transform);
-            Debug.Log(other.name + " has entered. List Count: " +  targets.Count);
         }
     }
 
@@ -22,7 +22,6 @@ public class FrogTongueAssist : MonoBehaviour
         if (other.CompareTag("Tonguable"))
         {
             targets.Remove(other.transform);
-            Debug.Log(other.name + " has Exit. List Count: " + targets.Count);
         }
     }
 
@@ -61,13 +60,13 @@ public class FrogTongueAssist : MonoBehaviour
 
         for (int i = 0; i < targets.Count; i++)
         {
-            if (Vector3.Angle(transform.forward, targets[i].position - transform.position) < minAngle)
+            float angleDiff = Vector3.Angle(transform.forward, targets[i].position - transform.position);
+            if (angleDiff < minAngle)
             {
                 result = targets[i];
             }
         }
-        Debug.Log(result.name);
-        return result.GetComponent<Tonguable>();
+        return result == null ? null : result.GetComponent<Tonguable>();
     }
 
     private bool StillIntersect(Collider collider)
