@@ -1,0 +1,26 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI%20Toolkit/theme.uss?fileID=7433441132597879392&amp;guid=788a4b23a276a9c86a821517c8f7986b&amp;type=3#theme" />
+    <ui:VisualElement name="main-container" class="container">
+        <ui:Label text="Frog Game" name="title" class="title" />
+        <ui:VisualElement name="button-container" class="button-container" style="display: flex;">
+            <ui:Button text="Start" name="start-button" class="menu-button" />
+            <ui:Button text="Settings" name="settings-button" class="menu-button" />
+            <ui:Button text="Exit" name="exit-button" class="menu-button" />
+        </ui:VisualElement>
+        <ui:VisualElement name="option-panel" class="option-panel" style="display: none;">
+            <ui:Label text="Options" name="option-title" class="option-title" />
+            <ui:VisualElement name="option-container" class="option-container">
+                <ui:Label text="Resolution:" name="resolution-label" class="option-label" />
+                <ui:TextField name="resolution-width" class="option-textfield" />
+                <ui:TextField name="resolution-height" class="option-textfield" />
+                <ui:Label text="Anti-Aliasing:" name="aa-label" class="option-label" />
+                <ui:DropdownField name="aa-select" class="option-select" />
+                <ui:SliderInt name="aa-multiplier" low-value="0" high-value="8" class="option-slider" />
+                <ui:Label text="Graphics Quality:" name="graphics-label" class="option-label" />
+                <ui:DropdownField name="graphics-select" class="option-select" />
+            </ui:VisualElement>
+            <ui:Button text="Back" name="back-button" class="menu-button" />
+            <ui:Button text="Save" name="save-button" class="menu-button" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

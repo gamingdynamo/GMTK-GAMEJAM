@@ -1,0 +1,19 @@
+.in-game-button {
+    height: 50px;
+    margin: 10px 0;
+    font-size: 18px;
+    background-color: #4CAF50;
+    color: white;
+    border-width: 0;
+    border-radius: 5px;
+    transition-duration: 0.2s;
+}
+.in-game-button:hover {
+    background-color: #45a049;
+    scale: 1.05;
+}
+
+.in-game-button:active {
+    background-color: #3e8e41;
+    scale: 0.95;
+}
