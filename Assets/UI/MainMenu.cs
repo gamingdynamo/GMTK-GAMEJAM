@@ -8,8 +8,9 @@ public class MainMenu : MonoBehaviour
     private Button startButton;
     private Button settingsButton;
     private Button exitButton;
-    private VisualElement MainMenuPanel;
-    private VisualElement OptionPanel;
+    private Button backButton;
+    private VisualElement mainMenuPanel;
+    private VisualElement optionPanel;
 
     private void Awake()
     {
@@ -23,10 +24,18 @@ public class MainMenu : MonoBehaviour
         startButton = root.Q<Button>("start-button");
         settingsButton = root.Q<Button>("settings-button");
         exitButton = root.Q<Button>("exit-button");
+        backButton = root.Q<Button>("back-button");
+        mainMenuPanel = root.Q<VisualElement>("button-container");
+        optionPanel = root.Q<VisualElement>("option-panel");
+
 
         startButton.clicked += StartGame;
         settingsButton.clicked += OpenSettings;
         exitButton.clicked += ExitGame;
+        backButton.clicked += OpenMainMenu;
+
+        // Ensure the main menu is visible and options are hidden initially
+        OpenMainMenu();
     }
 
     private void OnDisable()
@@ -34,6 +43,7 @@ public class MainMenu : MonoBehaviour
         startButton.clicked -= StartGame;
         settingsButton.clicked -= OpenSettings;
         exitButton.clicked -= ExitGame;
+        backButton.clicked -= OpenMainMenu;
     }
 
     private void StartGame()
@@ -44,11 +54,14 @@ public class MainMenu : MonoBehaviour
     private void OpenSettings()
     {
         Debug.Log("Opening settings...");
-
+        mainMenuPanel.style.display = DisplayStyle.None;
+        optionPanel.style.display = DisplayStyle.Flex;
     }
+
     private void OpenMainMenu()
     {
-        MainMenuPanel;
+        mainMenuPanel.style.display = DisplayStyle.Flex;
+        optionPanel.style.display = DisplayStyle.None;
     }
 
     private void ExitGame()
@@ -59,5 +72,18 @@ public class MainMenu : MonoBehaviour
         #else
             Application.Quit();
         #endif
+    }
+
+    // Additional methods for settings functionality
+    private void ApplySettings()
+    {
+        // Implement logic to apply settings
+        Debug.Log("Applying settings...");
+    }
+
+    private void ResetSettings()
+    {
+        // Implement logic to reset settings to default
+        Debug.Log("Resetting settings to default...");
     }
 }
