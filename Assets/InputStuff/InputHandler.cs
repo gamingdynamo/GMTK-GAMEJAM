@@ -21,7 +21,7 @@ public class InputHandler : MonoBehaviour
     /// ScreenSpace
     /// </summary>
     /// */
-    public Vector2 mousePosition;
+    public Vector3 mousedelta;
     void Awake()
     {   
         if(Instance == null)
@@ -65,7 +65,7 @@ public class InputHandler : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        mousePosition = Input.mousePosition;
+        mousedelta = Input.mousePositionDelta;
         //Update FrogTongue Aimming Direction
         //FrogBehaviour.Instance.UpdateAimPosition(CameraForwardDirection)
     }
