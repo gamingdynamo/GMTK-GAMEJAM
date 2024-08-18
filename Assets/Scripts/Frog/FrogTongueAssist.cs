@@ -6,25 +6,23 @@ using UnityEngine;
 public class FrogTongueAssist : MonoBehaviour
 {
     private BoxCollider[] colids;
-    private List<Transform> targets = new List<Transform>();
+    private Transform closestTarget = null;
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
-        if (other.CompareTag("Tonguable"))
+        if (!other.CompareTag("Tonguable")) { return; }
+        if (closestTarget == null)
         {
-            if (targets.Contains(other.transform)) { return; }
-            targets.Add(other.transform);
+            closestTarget = other.transform;
+        }
+        else
+        {
+            if (Vector3.Angle(transform.forward, other.transform.position - transform.position) < Vector3.Angle(transform.forward, closestTarget.position - transform.position))
+            {
+                closestTarget = other.transform;
+            }
         }
     }
-
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.CompareTag("Tonguable"))
-        {
-            targets.Remove(other.transform);
-        }
-    }
-
     public void SetAimAssistRotation(Vector3 forwardDir)
     {
         transform.forward = forwardDir;
@@ -54,35 +52,12 @@ public class FrogTongueAssist : MonoBehaviour
 
     public Tonguable LockInTarget()
     {
-        if (targets.Count <= 0) { return null; }
-        Transform result = null;
-        float minAngle = Mathf.Infinity;
-
-        for (int i = 0; i < targets.Count; i++)
-        {
-            float angleDiff = Vector3.Angle(transform.forward, targets[i].position - transform.position);
-            if (angleDiff < minAngle)
-            {
-                result = targets[i];
-            }
-        }
-        return result == null ? null : result.GetComponent<Tonguable>();
+        return InAngles(closestTarget) ? closestTarget.GetComponent<Tonguable>() : null;
     }
-
-    private bool StillIntersect(Collider collider)
+    
+    private bool InAngles(Transform trans)
     {
-        for (int i = 0; i < colids.Length; i++)
-        {
-            if (colids[i].bounds.Intersects(collider.bounds))
-            {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public void RemoveTonguable(Tonguable tonguable)
-    {
-        
+        if (trans == null) { return false; }
+        return Vector3.Angle(transform.forward, trans.position - transform.position) <= FrogBehaviour.Instance.FrogScripObj.AimAssistAngle * 0.5f;
     }
 }
