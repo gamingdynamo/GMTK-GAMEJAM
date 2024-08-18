@@ -21,6 +21,7 @@ public class FrogBehaviour : MonoBehaviour
     private FrogWalkState frogCurrWalkState = FrogWalkState.Resting;
     private float frogWalkPastTime = 0.0f;
     private float frogWalkTimer = 0.0f;
+    private Vector3 cameraForward = Vector3.zero;
 
     private bool frogOnGround = false;
     private float leaveGroundTimer = 0.0f;
@@ -63,7 +64,17 @@ public class FrogBehaviour : MonoBehaviour
     private void FrogFaceDirection(Vector2 dir)
     {
         if (dir ==  Vector2.zero) { return; }
-        transform.rotation = Quaternion.Euler(0.0f, (dir.y < 0.0f ? 1.0f : -1.0f) * Vector2.Angle(Vector2.right, dir) - 90.0f, 0.0f);
+        transform.rotation = Quaternion.Euler(0.0f, VectorToAngle(dir), 0.0f);
+    }
+
+    private float VectorToAngle(Vector2 dir)
+    {
+        return Vector2.Angle(Vector2.up, dir);
+    }
+
+    private Vector2 AngleToVector(float angle)
+    {
+        return new Vector2(Mathf.Sin(Mathf.Deg2Rad * angle), Mathf.Cos(Mathf.Deg2Rad * angle));
     }
 
     //Called by inputhandler Move
@@ -75,10 +86,11 @@ public class FrogBehaviour : MonoBehaviour
     private void FrogWalkCheck()
     {
         if (inputDirection == Vector2.zero || frogCurrWalkState != FrogWalkState.Resting) { return; }
+        Vector2 camerInputDir = CameraInputDirection();
         if (frogOnGround)
         {
-            FrogFaceDirection(inputDirection);
-            frogWalkDirection = new Vector3(inputDirection.x, 0.0f, inputDirection.y);
+            FrogFaceDirection(camerInputDir);
+            frogWalkDirection = new Vector3(camerInputDir.x, 0.0f, camerInputDir.y);
             frogCurrWalkState++;
             frogWalkTimer = 0.0f;
             frogWalkPastTime = 0.0f;
@@ -88,8 +100,8 @@ public class FrogBehaviour : MonoBehaviour
         {
             //Fall Control
             //if (jumpDirection != Vector2.zero) { return; }
-            FrogFaceDirection(inputDirection);
-            frogRig.velocity += (frogScripObj.FrogJumpFallControlVelocity * Time.fixedDeltaTime * new Vector3(inputDirection.x, 0.0f, inputDirection.y));
+            FrogFaceDirection(camerInputDir);
+            frogRig.velocity += (frogScripObj.FrogJumpFallControlVelocity * Time.fixedDeltaTime * new Vector3(camerInputDir.x, 0.0f, camerInputDir.y));
         }
     }
 
@@ -167,9 +179,9 @@ public class FrogBehaviour : MonoBehaviour
         Invoke(nameof(FrogWalkCoolDown), frogScripObj.FrogWalkCoolDown);
         jumpInputTimer = 0.0f;
         jumpTimer = frogScripObj.FrogMaxJumpTime;
-        jumpDirection = inputDirection;
+        jumpDirection = CameraInputDirection();
         frogRig.useGravity = false;
-        FrogFaceDirection(jumpDirection);
+        FrogFaceDirection(CameraInputDirection());
     }
 
     private void JumpUpdate()
@@ -213,6 +225,16 @@ public class FrogBehaviour : MonoBehaviour
     public void UpdateAimPosition(Vector3 cameraForward)
     {
 
+    }
+
+    public void SetCamerForwardVector(Vector3 cameraForward)
+    {
+        this.cameraForward = cameraForward;
+    }
+
+    private Vector2 CameraInputDirection()
+    {
+        return AngleToVector(VectorToAngle(cameraForward) + VectorToAngle(inputDirection));
     }
 
     private void PlayAnimation(string parm, float playSpeed)
