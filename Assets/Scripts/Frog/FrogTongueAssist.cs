@@ -13,14 +13,12 @@ public class FrogTongueAssist : MonoBehaviour
         if (!other.CompareTag("Tonguable")) { return; }
         if (closestTarget == null)
         {
-            Debug.Log("Closest Add: " + other.name);
             closestTarget = other.transform;
         }
         else
         {
             if (Vector3.Angle(transform.forward, other.transform.position - transform.position) < Vector3.Angle(transform.forward, closestTarget.position - transform.position))
             {
-                Debug.Log("Closest Change: " + other.name);
                 closestTarget = other.transform;
             }
         }
