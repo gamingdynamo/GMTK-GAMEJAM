@@ -5,6 +5,9 @@ using UnityEngine;
 
 public class FrogTongueAssist : MonoBehaviour
 {
+    [SerializeField]
+    private RectTransform lookSignTrans;
+
     private BoxCollider[] colids;
     private Transform closestTarget = null;
 
@@ -23,6 +26,25 @@ public class FrogTongueAssist : MonoBehaviour
             }
         }
     }
+
+    private void Update()
+    {
+        if (!InAngles(closestTarget))
+        {
+            closestTarget = null;
+        }
+        if (closestTarget == null) 
+        { 
+            lookSignTrans.gameObject.SetActive(false);
+        }
+        else
+        {
+            lookSignTrans.gameObject.SetActive(true);
+            SetLookSignPosition();
+        }
+
+    }
+
     public void SetAimAssistRotation(Vector3 forwardDir)
     {
         transform.forward = forwardDir;
@@ -53,6 +75,11 @@ public class FrogTongueAssist : MonoBehaviour
     public Tonguable LockInTarget()
     {
         return InAngles(closestTarget) ? closestTarget.GetComponent<Tonguable>() : null;
+    }
+
+    private void SetLookSignPosition()
+    {
+        lookSignTrans.position = FrogBehaviour.Instance.CameraMain.WorldToScreenPoint(closestTarget.position);
     }
     
     private bool InAngles(Transform trans)

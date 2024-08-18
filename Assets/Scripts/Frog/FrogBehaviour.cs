@@ -18,13 +18,13 @@ public class FrogBehaviour : MonoBehaviour
     [SerializeField]
     private FrogTongueAssist aimAssist;
 
-    private Transform cameraTrans;
-    public Transform CameraTrans { get { 
-            if (cameraTrans == null)
+    private Camera cameraMain;
+    public Camera CameraMain { get { 
+            if (cameraMain == null)
             {
-                cameraTrans = Camera.main.transform;
+                cameraMain = Camera.main;
             }
-            return cameraTrans; 
+            return cameraMain; 
         } 
     }
 
@@ -247,7 +247,7 @@ public class FrogBehaviour : MonoBehaviour
     public void ShootTongue()
     {
         if (frogWalkDirection != Vector3.zero || shootingTongue) { return; }
-        FrogFaceDirection(new Vector2(CameraTrans.forward.x, CameraTrans.forward.z));
+        FrogFaceDirection(new Vector2(CameraMain.transform.forward.x, CameraMain.transform.forward.z));
         shootingTongue = true;
         frogAnmt.SetBool("Shooting", true);
         Invoke(nameof(TongueShotFinish), (frogScripObj.FrogTongueShootTime + frogScripObj.FrogTongueHoldTime + frogScripObj.FrogTongueRetrieveTime));
@@ -265,7 +265,7 @@ public class FrogBehaviour : MonoBehaviour
 
     public Vector3 AimPosition()
     {
-        return FrogScripObj.FrogTongueAimDistance * CameraTrans.forward + CameraTrans.position;
+        return FrogScripObj.FrogTongueAimDistance * CameraMain.transform.forward + CameraMain.transform.position;
     }
 
     public void TongueShotFinish()
@@ -276,7 +276,7 @@ public class FrogBehaviour : MonoBehaviour
 
     private Vector2 CameraInputDirection()
     {
-        return AngleToVector(VectorToAngle(new Vector2(CameraTrans.forward.x, CameraTrans.forward.z)) + VectorToAngle(inputDirection));
+        return AngleToVector(VectorToAngle(new Vector2(CameraMain.transform.forward.x, CameraMain.transform.forward.z)) + VectorToAngle(inputDirection));
     }
 
     private void TriggerAnimation(string parm, float playSpeed)
