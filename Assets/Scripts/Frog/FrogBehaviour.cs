@@ -254,7 +254,7 @@ public class FrogBehaviour : MonoBehaviour
         Tonguable target = aimAssist.LockInTarget();
         if (target != null)
         {
-            target.GotTongued();
+            //target.GotTongued();
             frogTongue.ShootTongue(target);
         }
         else
@@ -271,7 +271,7 @@ public class FrogBehaviour : MonoBehaviour
     public void TongueShotFinish()
     {
         shootingTongue = false;
-        //frogAnmt.SetBool("Shooting", false);
+        frogAnmt.SetBool("Shooting", false);
     }
 
     private Vector2 CameraInputDirection()

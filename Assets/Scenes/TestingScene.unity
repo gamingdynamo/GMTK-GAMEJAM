@@ -1329,6 +1329,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Virtual Camera
       objectReference: {fileID: 0}
+    - target: {fileID: 2241325172841648769, guid: 8eb2dcb44e7f8bf428c17493bed0ee82, type: 3}
+      propertyPath: m_SoftZoneWidth
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2241325172841648769, guid: 8eb2dcb44e7f8bf428c17493bed0ee82, type: 3}
+      propertyPath: m_SoftZoneHeight
+      value: 0.1
+      objectReference: {fileID: 0}
     - target: {fileID: 4429230432632272569, guid: 8eb2dcb44e7f8bf428c17493bed0ee82, type: 3}
       propertyPath: m_Follow
       value: 

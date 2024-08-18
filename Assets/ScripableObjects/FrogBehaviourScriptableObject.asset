@@ -12,23 +12,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b774de5feefe4e94193a60fed12f207e, type: 3}
   m_Name: FrogBehaviourScriptableObject
   m_EditorClassIdentifier: 
-  FrogWalkHeight: 0.2
-  FrogWalkDistance: 0.5
+  FrogWalkHeight: 0.3
+  FrogWalkDistance: 0.4
   FrogWalkTimeInterval: 0.2
-  FrogWalkCoolDown: 0.2
-  FrogJumpLeaveGroundCoyoteTime: 0.05
-  FrogJumpInputCoyoteTime: 0.05
+  FrogWalkCoolDown: 0.1
+  FrogJumpLeaveGroundCoyoteTime: 0.08
+  FrogJumpInputCoyoteTime: 0.08
   FrogMaxJumpTime: 0.5
-  FrogJumpVerticleVelocity: 5
-  FrogJumpForwardVelocity: 3
-  FrogJumpFallControlVelocity: 1
+  FrogJumpVerticleVelocity: 4
+  FrogJumpForwardVelocity: 2
+  FrogJumpFallControlVelocity: 5
   FrogTongueAimDistance: 7
   FrogTongueMaxLength: 5
   FrogTongueShootTime: 0.2
   FrogTongueHoldTime: 0.1
   FrogTongueRetrieveTime: 0.2
   FrogTongueRadiusScale: 0.01
-  AimAssistAngle: 30
-  AimAssistColliderNumber: 8
+  AimAssistAngle: 20
+  AimAssistColliderNumber: 5
   FrogHopAnimationSpeed: 2
   FrogJumpAnimationSpeed: 1

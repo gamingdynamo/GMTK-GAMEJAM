@@ -36,7 +36,7 @@ public class TongueBehaviour : MonoBehaviour
     private void TongueTransformChange()
     {
         if (currTongueState == FrogTongueState.Holding) { return; }
-        Vector3 endPos = (tongueTarget == null ? tongueEndPostion : tongueTarget.transform.position);
+        Vector3 endPos = (currTongueState == FrogTongueState.Retrieving ? tongueEndPostion : (tongueTarget == null ? tongueEndPostion : tongueTarget.transform.position));
         float directionalT = (currTongueState == FrogTongueState.Shooting ? tongueT : 1.0f - tongueT);
 
         //Scale
@@ -45,6 +45,10 @@ public class TongueBehaviour : MonoBehaviour
 
         //Position
         transform.position = Vector3.Lerp(tongueStartTrans.position, endPos, directionalT * 0.5f);
+        if (currTongueState == FrogTongueState.Retrieving && tongueTarget != null)
+        {
+            tongueTarget.transform.position = Vector3.Lerp(tongueStartTrans.position, endPos, directionalT);
+        }
 
         //Rotation
         transform.up = (endPos - tongueStartTrans.position).normalized;
@@ -68,11 +72,13 @@ public class TongueBehaviour : MonoBehaviour
                 if (tongueTarget != null)
                 {
                     tongueEndPostion = tongueTarget.transform.position;
-                    tongueTarget = null;
                 }
                 break;
             case FrogTongueState.Resting:
-                
+                if (tongueTarget != null)
+                {
+                    Destroy(tongueTarget.gameObject);
+                }
                 tongueStateTime = 0.0f;
                 tongueEndPostion = Vector3.zero;
                 tongueRend.enabled = false;
