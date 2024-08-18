@@ -109,7 +109,7 @@ public class FrogBehaviour : MonoBehaviour
             frogCurrWalkState++;
             frogWalkTimer = 0.0f;
             frogWalkPastTime = 0.0f;
-            PlayAnimation("Hop", frogScripObj.FrogHopAnimationSpeed);
+            TriggerAnimation("Hop", frogScripObj.FrogHopAnimationSpeed);
         }
         else
         {
@@ -194,6 +194,7 @@ public class FrogBehaviour : MonoBehaviour
     {
         frogCurrWalkState = FrogWalkState.CoolDown;
         Invoke(nameof(FrogWalkCoolDown), frogScripObj.FrogWalkCoolDown);
+        frogWalkDirection = Vector3.zero;
         jumpInputTimer = 0.0f;
         jumpTimer = frogScripObj.FrogMaxJumpTime;
         jumpDirection = inputDirection == Vector2.zero ? Vector2.zero : CameraInputDirection();
@@ -241,6 +242,7 @@ public class FrogBehaviour : MonoBehaviour
         if (!frogOnGround || frogWalkDirection != Vector3.zero || !frogRig.useGravity || shootingTongue) { return; }
         FrogFaceDirection(new Vector2(CameraTrans.forward.x, CameraTrans.forward.z));
         shootingTongue = true;
+        frogAnmt.SetBool("Shooting", true);
         Invoke(nameof(TongueShotFinish), (frogScripObj.FrogTongueShootTime + frogScripObj.FrogTongueHoldTime + frogScripObj.FrogTongueRetrieveTime));
         frogTongue.ShootTongue(FrogScripObj.FrogTongueAimDistance * CameraTrans.forward + CameraTrans.position);
         /*if (Locked to some target)
@@ -256,6 +258,7 @@ public class FrogBehaviour : MonoBehaviour
     public void TongueShotFinish()
     {
         shootingTongue = false;
+        frogAnmt.SetBool("Shooting", false);
     }
 
     private Vector2 CameraInputDirection()
@@ -263,7 +266,7 @@ public class FrogBehaviour : MonoBehaviour
         return AngleToVector(VectorToAngle(new Vector2(CameraTrans.forward.x, CameraTrans.forward.z)) + VectorToAngle(inputDirection));
     }
 
-    private void PlayAnimation(string parm, float playSpeed)
+    private void TriggerAnimation(string parm, float playSpeed)
     {
         frogAnmt.speed = playSpeed;
         frogAnmt.SetTrigger(parm);

@@ -2,8 +2,6 @@ using UnityEngine;
 
 public class FreeCam : MonoBehaviour
 {
-    private Transform cameraTrans;
-
     public float movementSpeed = 10f;
     public float fastSpeedMultiplier = 5f;
     public float mouseSensitivity = 2f;
@@ -13,7 +11,7 @@ public class FreeCam : MonoBehaviour
 
     private void Start()
     {
-        cameraTrans = Camera.main.transform;
+        LockCursor();
     }
 
     void Update()
