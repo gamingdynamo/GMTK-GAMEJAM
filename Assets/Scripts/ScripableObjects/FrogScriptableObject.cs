@@ -29,7 +29,15 @@ public class FrogScriptableObject : ScriptableObject
 
     [Header("Aim Assist")]
     public float AimAssistAngle = 15.0f;
+    public float AimAssistYOffset = 0.3f;
     public int AimAssistColliderNumber = 3;
+
+    [Header("Frog Upgrade")]
+    public float FrogScaleIncreaseAmount = 0.1f;
+    public float FrogJumpTimeIncreaseAmount = 0.1f;
+    public float FrogJumpYVelocityIncreaseAmount = 0.5f;
+    public float FrogJumpXZVelocityIncreaseAmount = 0.5f;
+    public float FrogTongueLengthIncreaseAmount = 0.5f;
 
     [Header("Frog Animation")]
     public float FrogHopAnimationSpeed = 2.0f;

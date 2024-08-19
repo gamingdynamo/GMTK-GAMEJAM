@@ -1,4 +1,4 @@
-enum FrogWalkState
+public enum FrogWalkState
 {
     Resting,
     Walking,
@@ -6,11 +6,26 @@ enum FrogWalkState
     EndOfEnum
 }
 
-enum FrogTongueState
+public enum FrogTongueState
 {
     Resting,
     Shooting,
     Holding,
     Retrieving,
     EndOfEnum
+}
+
+public enum FlyUpgradeType
+{
+    AllType,
+    Scaling,
+    Jumping,
+    Tonguing
+}
+
+public enum FlyBehaveMode
+{
+    Stay,
+    Patroll,
+    FlyRandom
 }

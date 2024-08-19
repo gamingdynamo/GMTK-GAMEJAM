@@ -22,13 +22,19 @@ MonoBehaviour:
   FrogJumpVerticleVelocity: 4
   FrogJumpForwardVelocity: 2
   FrogJumpFallControlVelocity: 5
-  FrogTongueAimDistance: 7
+  FrogTongueAimDistance: 5
   FrogTongueMaxLength: 5
   FrogTongueShootTime: 0.2
   FrogTongueHoldTime: 0.1
   FrogTongueRetrieveTime: 0.2
   FrogTongueRadiusScale: 0.01
   AimAssistAngle: 20
+  AimAssistYOffset: 0.3
   AimAssistColliderNumber: 5
+  FrogScaleIncreaseAmount: 0.1
+  FrogJumpTimeIncreaseAmount: 0.05
+  FrogJumpYVelocityIncreaseAmount: 0.1
+  FrogJumpXZVelocityIncreaseAmount: 0.1
+  FrogTongueLengthIncreaseAmount: 0.3
   FrogHopAnimationSpeed: 2
   FrogJumpAnimationSpeed: 1
