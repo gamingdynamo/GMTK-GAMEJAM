@@ -2,18 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PushTonguable : Tonguable
+public class PullTonguable : Tonguable
 {
     [SerializeField]
     private Rigidbody rig;
     [SerializeField]
-    private PushTonguableScriptableObject pushScriptObj;
+    private PullTonguableScriptableObject pullScriptObj;
+    public PullTonguableScriptableObject PullScriptObj { get { return pullScriptObj; } }
 
     private void Start()
     {
-        if (pushScriptObj == null)
+        if (pullScriptObj == null)
         {
-            Debug.Log("ERROR: push Scriptable Object is missing in " + gameObject.name);
+            Debug.Log("ERROR: Pull Scriptable Object is missing in " + gameObject.name);
             Destroy(gameObject);
             return;
         }
@@ -24,7 +25,7 @@ public class PushTonguable : Tonguable
     {
         if (collision.transform.CompareTag("Frog"))
         {
-            if (pushScriptObj.IsMovable) { return; }
+            if (PullScriptObj.IsMovable) { return; }
             rig.isKinematic = true;
         }
     }
@@ -33,20 +34,20 @@ public class PushTonguable : Tonguable
     {
         if (collision.transform.CompareTag("Frog"))
         {
-            if (pushScriptObj.IsMovable) { return; }
+            if (PullScriptObj.IsMovable) { return; }
             rig.isKinematic = false;
         }
     }
 
     public override void GotTongued()
     {
-        if (FrogBehaviour.Instance.FrogTongueLevel < pushScriptObj.PushRequiredLevel) { return; }
-        rig.AddForce(pushScriptObj.PushForce * (transform.position - TongueBehave.transform.position).normalized, ForceMode.Impulse);
-        transform.localScale = Mathf.Clamp(transform.localScale.magnitude + pushScriptObj.PushIncreaseSize, 0.0f, pushScriptObj.MaxSize) * transform.localScale.normalized;
+        if (FrogBehaviour.Instance.FrogTongueLevel < pullScriptObj.PullRequiredLevel) { return; }
+        if (TongueBehave == null) { return; }
+        TongueBehave.SetTonguePullTarget(this);
     }
 
     public override void GotRetrieved()
     {
-        
+
     }
 }

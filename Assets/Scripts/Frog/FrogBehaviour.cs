@@ -43,6 +43,7 @@ public class FrogBehaviour : MonoBehaviour
     private float jumpInputTimer = 0.0f;
     private float jumpTimer = 0.0f;
     private Vector2 jumpDirection = Vector2.zero;
+    private Vector3 hookRushVelocity = Vector3.zero;
 
     private bool shootingTongue = false;
 
@@ -190,26 +191,38 @@ public class FrogBehaviour : MonoBehaviour
         JumpAction();
     }
 
-    private void JumpAction()
+    public void JumpAction()
     {
         frogCurrWalkState = FrogWalkState.CoolDown;
         Invoke(nameof(FrogWalkCoolDown), frogScripObj.FrogWalkCoolDown);
         frogWalkDirection = Vector3.zero;
         jumpInputTimer = 0.0f;
+        frogRig.useGravity = false;
         jumpTimer = GetJumpTime();
         jumpDirection = inputDirection == Vector2.zero ? Vector2.zero : CameraInputDirection();
-        frogRig.useGravity = false;
         if (inputDirection != Vector2.zero)
         {
             FrogFaceDirection(CameraInputDirection());
         }
     }
 
+    public void JumpAction(float hookRushTime, Vector3 hookRushVelocity)
+    {
+        frogCurrWalkState = FrogWalkState.CoolDown;
+        Invoke(nameof(FrogWalkCoolDown), frogScripObj.FrogWalkCoolDown);
+        frogWalkDirection = Vector3.zero;
+        jumpInputTimer = 0.0f;
+        frogRig.useGravity = false;
+        jumpTimer = hookRushTime;
+        this.hookRushVelocity = hookRushVelocity;
+        FrogFaceDirection(new Vector2(hookRushVelocity.x, hookRushVelocity.z));
+    }
+
     private void JumpUpdate()
     {
         if (jumpTimer > 0.0f)
         {
-            frogRig.position += (Time.fixedDeltaTime * (FrogJumpVerticleVelocity() + FrogJumpForwardVelocity()));
+            frogRig.position += (hookRushVelocity == Vector3.zero ? (Time.fixedDeltaTime * (FrogJumpVerticleVelocity() + FrogJumpForwardVelocity())) : Time.fixedDeltaTime * hookRushVelocity);
             return;
         } 
         JumpStop();
@@ -235,6 +248,11 @@ public class FrogBehaviour : MonoBehaviour
         {
             frogRig.velocity += FrogJumpForwardVelocity();
         }
+        else if (hookRushVelocity != Vector3.zero)
+        {
+            frogRig.velocity += hookRushVelocity;
+        }
+        hookRushVelocity = Vector3.zero;
         jumpDirection = Vector2.zero;
         jumpTimer = 0.0f;
     }

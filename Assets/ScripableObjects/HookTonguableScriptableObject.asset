@@ -9,11 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 86eba48074eef9948aa696acca54b7a8, type: 3}
-  m_Name: PushTonguableScriptableObject
+  m_Script: {fileID: 11500000, guid: 4f88e55963b1a8a4a84617ad64f44f84, type: 3}
+  m_Name: HookTonguableScriptableObject
   m_EditorClassIdentifier: 
-  PushRequiredLevel: 0
-  PushForce: 5
-  PushIncreaseSize: 0
-  MaxSize: 2
-  IsMovable: 1
+  HookRushTime: 0.1
+  HookRushVelocity: 7

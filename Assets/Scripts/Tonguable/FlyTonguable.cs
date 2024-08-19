@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEditorInternal;
 using UnityEngine;
 
-public class FlyBehaviour : Tonguable
+public class FlyTonguable : Tonguable
 {
     [SerializeField]
     private FlyUpgradeType upgradeType = FlyUpgradeType.AllType;
@@ -14,6 +14,9 @@ public class FlyBehaviour : Tonguable
     [SerializeField]
     [Tooltip("For Patroll mode, this will be the center. For RandomFly, this will be the original Position")]
     private Transform targetTrans;
+
+    private bool tongued = false;
+    public bool Tongued { get { return tongued; } set { tongued = value; } }
 
     private float flyTimer = 0.0f;
     private int posIndex = 0;
@@ -120,5 +123,17 @@ public class FlyBehaviour : Tonguable
     private Vector3 rotationAngleDirection(Vector2 dir)
     {
         return (dir.x * targetTrans.right + dir.y * targetTrans.forward).normalized;
+    }
+
+    public override void GotTongued()
+    {
+        base.GotTongued();
+        tongued = true;
+    }
+
+    public override void GotRetrieved()
+    {
+        FrogBehaviour.Instance.UpgradeFrog(upgradeType);
+        Destroy(gameObject);
     }
 }
