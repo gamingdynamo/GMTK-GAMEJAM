@@ -47,8 +47,11 @@ public class FrogBehaviour : MonoBehaviour
     private bool shootingTongue = false;
 
     private int frogScaleLevel = 0;
+    public int FrogScaleLevel { get { return frogScaleLevel; } }
     private int frogJumpLevel = 0;
-    private int FrogTongueLevel = 0;
+    public int FrogJumpLevel { get { return frogJumpLevel; } }
+    private int frogTongueLevel = 0;
+    public int FrogTongueLevel { get {return frogTongueLevel; } }
 
     private void Start()
     {
@@ -314,7 +317,7 @@ public class FrogBehaviour : MonoBehaviour
 
     public void UpgradeTongue()
     {
-        FrogTongueLevel++;
+        frogTongueLevel++;
         aimAssist.SetAimAssist(GetTongueLength() / frogScripObj.AimAssistColliderNumber / 2.0f);
     }
 
@@ -343,7 +346,7 @@ public class FrogBehaviour : MonoBehaviour
 
     public float GetTongueLength()
     {
-        return frogScripObj.FrogTongueMaxLength + frogScripObj.FrogTongueLengthIncreaseAmount * FrogTongueLevel;
+        return frogScripObj.FrogTongueMaxLength + frogScripObj.FrogTongueLengthIncreaseAmount * frogTongueLevel;
     }
 
 
