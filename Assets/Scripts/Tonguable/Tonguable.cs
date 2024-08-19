@@ -11,7 +11,6 @@ public class Tonguable : MonoBehaviour
 
     public virtual void GotTongued()
     {
-        Debug.Log("Warning: Tonguable should not be used directly");
         if (TongueBehave == null) { return; }
         TongueBehave.SetTonguePullTarget(this);
         tongued = true;
@@ -19,7 +18,6 @@ public class Tonguable : MonoBehaviour
     
     public virtual void GotRetrieved()
     {
-        Debug.Log("Warning: Tonguable should not be used directly");
         FrogBehaviour.Instance.UpgradeFrog(FlyUpgradeType.AllType);
         Destroy(gameObject);
     }
