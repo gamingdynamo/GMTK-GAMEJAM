@@ -50,9 +50,8 @@ public class FrogTongueAssist : MonoBehaviour
         transform.forward = forwardDir;
     }
 
-    private void SetAimAssist(int level)
+    public void SetAimAssist(float halfColidDistance)
     {
-        float halfColidDistance = FrogBehaviour.Instance.FrogScripObj.FrogTongueMaxLength / FrogBehaviour.Instance.FrogScripObj.AimAssistColliderNumber / 2.0f;
         for (int i = 0; i < colids.Length; i++)
         {
             colids[i].center = (1.0f + 2.0f * i) * halfColidDistance * Vector3.forward;
@@ -69,7 +68,6 @@ public class FrogTongueAssist : MonoBehaviour
             gameObject.AddComponent<BoxCollider>().isTrigger = true;
         }
         colids = GetComponents<BoxCollider>();
-        SetAimAssist(0);
     }
 
     public Tonguable LockInTarget()
