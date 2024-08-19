@@ -54,12 +54,7 @@ public class FrogBehaviour : MonoBehaviour
     public int FrogTongueLevel { get {return frogTongueLevel; } }
 
     private void Start()
-    {
-        //Put at a better place later
-        Cursor.lockState = CursorLockMode.Confined;
-        Cursor.visible = false;
-        ////////////////////////////////////
-        
+    {   
         if (Instance == null)
         {
             Instance = this;

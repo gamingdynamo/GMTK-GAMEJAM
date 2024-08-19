@@ -121,17 +121,4 @@ public class FlyBehaviour : Tonguable
     {
         return (dir.x * targetTrans.right + dir.y * targetTrans.forward).normalized;
     }
-
-    public override void GotTongued()
-    {
-        if (TongueBehave == null) { return; }
-        TongueBehave.SetTonguePullTarget(this);
-    }
-
-    public override void GotRetrieved()
-    {
-        FrogBehaviour.Instance.UpgradeFrog(upgradeType);
-        Destroy(gameObject);
-    }
-
 }
