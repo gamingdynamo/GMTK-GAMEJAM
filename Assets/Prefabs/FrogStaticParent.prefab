@@ -141,6 +141,10 @@ PrefabInstance:
       propertyPath: frogTongue
       value: 
       objectReference: {fileID: 7774912367265587690}
+    - target: {fileID: 1962922412052004831, guid: 730001641a15e2f469d083af39ceacec, type: 3}
+      propertyPath: m_TagString
+      value: FrogGroundCheck
+      objectReference: {fileID: 0}
     - target: {fileID: 3725225312251805846, guid: 730001641a15e2f469d083af39ceacec, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.5
