@@ -19,7 +19,8 @@ public class FrogBehaviour : MonoBehaviour
     private FrogTongueAssist aimAssist;
 
     private Camera cameraMain;
-    public Camera CameraMain { get { 
+    public Camera CameraMain { 
+        get { 
             if (cameraMain == null)
             {
                 cameraMain = Camera.main;
@@ -237,7 +238,7 @@ public class FrogBehaviour : MonoBehaviour
     {
         if (frogRig.useGravity) { return; }
         frogRig.useGravity = true;
-        frogRig.velocity = FrogJumpForwardVelocity();
+        frogRig.velocity = jumpDirection != Vector2.zero ? FrogJumpForwardVelocity() : new Vector3(frogRig.velocity.x, 0.0f, frogRig.velocity.z);
         jumpDirection = Vector2.zero;
         jumpTimer = 0.0f;
     }
