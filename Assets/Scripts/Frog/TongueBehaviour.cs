@@ -66,7 +66,7 @@ public class TongueBehaviour : MonoBehaviour
                 tongueStateTime = FrogBehaviour.Instance.FrogScripObj.FrogTongueShootTime;
                 if (tongueTarget != null)
                 {
-                    tongueTarget.SetTongueBehave(this);
+                    tongueTarget.TongueBehave = this;
                 }
                 break;
             case FrogTongueState.Holding:

@@ -5,21 +5,22 @@ using UnityEngine;
 public class Tonguable : MonoBehaviour
 {
     private TongueBehaviour tongueBehave;
+    public TongueBehaviour TongueBehave {  get { return tongueBehave; } set { tongueBehave = value; } }
+    private bool tongued = false;
+    public bool Tongued { get { return tongued; } set { tongued = value; } }
 
-    public void GotTongued()
+    public virtual void GotTongued()
     {
-        if (tongueBehave == null) { return; }
-        tongueBehave.SetTonguePullTarget(this);
+        Debug.Log("Warning: Tonguable should not be used directly");
+        if (TongueBehave == null) { return; }
+        TongueBehave.SetTonguePullTarget(this);
+        tongued = true;
     }
-
-    public void GotRetrieved()
+    
+    public virtual void GotRetrieved()
     {
-        FrogBehaviour.Instance.UpgradeFrog();
+        Debug.Log("Warning: Tonguable should not be used directly");
+        FrogBehaviour.Instance.UpgradeFrog(FlyUpgradeType.AllType);
         Destroy(gameObject);
-    }
-
-    public void SetTongueBehave(TongueBehaviour tongueBehave)
-    {
-        this.tongueBehave = tongueBehave;
     }
 }

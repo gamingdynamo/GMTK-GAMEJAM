@@ -94,17 +94,7 @@ public class FrogBehaviour : MonoBehaviour
     private void FrogFaceDirection(Vector2 dir)
     {
         if (dir ==  Vector2.zero) { return; }
-        transform.rotation = Quaternion.Euler(0.0f, 180.0f + VectorToAngle(dir), 0.0f);
-    }
-
-    private float VectorToAngle(Vector2 dir)
-    {
-        return (dir.x < 0.0f ? -1.0f : 1.0f) * Vector2.Angle(Vector2.up, dir);
-    }
-
-    private Vector2 AngleToVector(float angle)
-    {
-        return new Vector2(Mathf.Sin(Mathf.Deg2Rad * angle), Mathf.Cos(Mathf.Deg2Rad * angle));
+        transform.rotation = Quaternion.Euler(0.0f, 180.0f + GameManager.VectorToAngle(dir), 0.0f);
     }
 
     //Called by inputhandler Move
@@ -285,18 +275,54 @@ public class FrogBehaviour : MonoBehaviour
 
     private Vector2 CameraInputDirection()
     {
-        return AngleToVector(VectorToAngle(new Vector2(CameraMain.transform.forward.x, CameraMain.transform.forward.z)) + VectorToAngle(inputDirection));
+        return GameManager.AngleToVector(GameManager.VectorToAngle(new Vector2(CameraMain.transform.forward.x, CameraMain.transform.forward.z)) + GameManager.VectorToAngle(inputDirection));
     }
 
-    public void UpgradeScale()
+    public void UpgradeFrog(FlyUpgradeType type)
+    {
+        switch (type)
+        {
+            case FlyUpgradeType.AllType:
+                UpgradeFrogAll();
+                break;
+            case FlyUpgradeType.Scaling:
+                    UpgradeScale();
+                break;
+            case FlyUpgradeType.Jumping:
+                    UpgradeJump();
+                break;
+            case FlyUpgradeType.Tonguing:
+                    UpgradeTongue();
+                break;
+            default:
+                Debug.Log("ERROR: Wait what?? what are you trying to upgrade??");
+                break;
+        }
+
+    }
+
+    private void UpgradeScale()
     {
         frogScaleLevel++;
         transform.localScale = (1.0f + frogScaleLevel * frogScripObj.FrogScaleIncreaseAmount) * Vector3.one;
     }
 
-    public void UpgradeJump()
+    private void UpgradeJump()
     {
         frogJumpLevel++;
+    }
+
+    public void UpgradeTongue()
+    {
+        FrogTongueLevel++;
+        aimAssist.SetAimAssist(GetTongueLength() / frogScripObj.AimAssistColliderNumber / 2.0f);
+    }
+
+    private void UpgradeFrogAll()
+    {
+        UpgradeScale();
+        UpgradeJump();
+        UpgradeTongue();
     }
 
     public float GetJumpTime()
@@ -314,23 +340,12 @@ public class FrogBehaviour : MonoBehaviour
         return frogScripObj.FrogJumpForwardVelocity + frogScripObj.FrogJumpXZVelocityIncreaseAmount * frogJumpLevel;
     }
 
-    public void UpgradeTongue()
-    {
-        FrogTongueLevel++;
-        aimAssist.SetAimAssist(GetTongueLength() / frogScripObj.AimAssistColliderNumber / 2.0f);
-    }
 
     public float GetTongueLength()
     {
         return frogScripObj.FrogTongueMaxLength + frogScripObj.FrogTongueLengthIncreaseAmount * FrogTongueLevel;
     }
 
-    public void UpgradeFrog()
-    {
-        UpgradeScale();
-        UpgradeJump();
-        UpgradeTongue();
-    }
 
     private void TriggerAnimation(string parm, float playSpeed)
     {
