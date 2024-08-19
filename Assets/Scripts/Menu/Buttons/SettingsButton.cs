@@ -5,20 +5,25 @@ using UnityEngine;
 public class SettingsButton : MonoBehaviour
 {
     [SerializeField]
-    private GameObject[] SettingsObject, OtherObject;
-    private bool isSettingsActive = false;
+    private GameObject SettingsObject, OtherObject;
+    private static bool isSettingsActive = false;
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            openAndCloseSettings();
+            Time.timeScale = 0f;
+        }
+    }
 
     public void openAndCloseSettings()
     {
         isSettingsActive = !isSettingsActive;
-        for (int i = 0; i < SettingsObject.Length; i++)
+        SettingsObject.SetActive(isSettingsActive);
+        if (OtherObject != null)
         {
-            SettingsObject[i].SetActive(isSettingsActive);
-        }
-        for (int i = 0; i < OtherObject.Length; i++)
-        {
-            OtherObject[i].SetActive(!isSettingsActive);
+            OtherObject.SetActive(!isSettingsActive);
         }
     }
 }
