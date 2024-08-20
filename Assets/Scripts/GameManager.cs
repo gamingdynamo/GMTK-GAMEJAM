@@ -59,19 +59,12 @@ public class GameManager : MonoBehaviour
     }
 
     public void ShowPauseMenu()
-    {
+    {   
         togglePauseMenu = !togglePauseMenu;
-        PauseMain.SetActive(togglePauseMenu);
-        if (!togglePauseMenu)
-        {
-            Cursor.lockState = CursorLockMode.Locked;
-        }
-        else
-        {
-            Cursor.lockState = CursorLockMode.None;
-
-        }
+        Cursor.lockState = togglePauseMenu ? CursorLockMode.None : CursorLockMode.Locked;
         Cursor.visible = togglePauseMenu;
-        Time.timeScale = togglePauseMenu ? 0 : 1;
+        Time.timeScale = togglePauseMenu ? 0.0f : 1.0f;
+        if (PauseMain == null) { return; }
+        PauseMain.SetActive(togglePauseMenu);
     }
 }

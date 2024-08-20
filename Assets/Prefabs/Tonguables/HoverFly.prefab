@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7028154690957711748}
   m_Layer: 0
-  m_Name: FlyPacket
+  m_Name: HoverFly
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -58,7 +58,7 @@ Transform:
   m_GameObject: {fileID: 7173031633516751091}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -5.0414176, y: -6.408081, z: -3.6142159}
+  m_LocalPosition: {x: 0.784, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -74,15 +74,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 7337087817353646325, guid: 98fea0bae2e89e84ca661bf7f3c2ddbd, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -7.106326
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7337087817353646325, guid: 98fea0bae2e89e84ca661bf7f3c2ddbd, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -6.797409
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7337087817353646325, guid: 98fea0bae2e89e84ca661bf7f3c2ddbd, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -2.3527222
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7337087817353646325, guid: 98fea0bae2e89e84ca661bf7f3c2ddbd, type: 3}
       propertyPath: m_LocalRotation.w
@@ -123,36 +123,16 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 7969474492122892879, guid: 98fea0bae2e89e84ca661bf7f3c2ddbd, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 4540237129304684797}
+      addedObject: {fileID: 5648411138010621961}
     - targetCorrespondingSourceObject: {fileID: 7969474492122892879, guid: 98fea0bae2e89e84ca661bf7f3c2ddbd, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 5648411138010621961}
+      addedObject: {fileID: 186897761893533842}
   m_SourcePrefab: {fileID: 100100000, guid: 98fea0bae2e89e84ca661bf7f3c2ddbd, type: 3}
 --- !u!1 &5940325227448617424 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7969474492122892879, guid: 98fea0bae2e89e84ca661bf7f3c2ddbd, type: 3}
   m_PrefabInstance: {fileID: 4389044266863182751}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &4540237129304684797
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5940325227448617424}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4321b07eec44fe244932f55462960bac, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  amplitude: 0.01
-  frequency: 2
-  hoverZone: {fileID: 3951062547314951966}
-  HoverRaduis: 3.91
-  approximate_player_size: 0.5
-  roamspeed: 2
-  min_idleTime: 1
-  max_idleTime: 4
 --- !u!54 &5648411138010621961
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -180,6 +160,26 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &186897761893533842
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5940325227448617424}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c6d1735a7d4b314c950a3580d42c8c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  amplitude: 0.01
+  frequency: 2
+  hoverZone: {fileID: 3951062547314951966}
+  HoverRaduis: 2
+  approximate_player_size: 0.5
+  roamspeed: 1
+  min_idleTime: 1
+  max_idleTime: 4
 --- !u!4 &6429898913400853354 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7337087817353646325, guid: 98fea0bae2e89e84ca661bf7f3c2ddbd, type: 3}

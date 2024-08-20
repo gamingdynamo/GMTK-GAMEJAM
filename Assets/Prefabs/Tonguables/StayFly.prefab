@@ -614,7 +614,7 @@ GameObject:
   - component: {fileID: 4647450973841275500}
   - component: {fileID: 6886094678940651961}
   m_Layer: 0
-  m_Name: Fly FBX
+  m_Name: StayFly
   m_TagString: Tonguable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
