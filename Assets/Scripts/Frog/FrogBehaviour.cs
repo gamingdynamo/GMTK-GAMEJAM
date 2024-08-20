@@ -174,6 +174,7 @@ public class FrogBehaviour : MonoBehaviour
         frogOnGround = tf;
         if (tf)
         {
+            frogRig.velocity = new Vector3(0.0f, frogRig.velocity.y, 0.0f);
             if (jumpInputTimer <= 0.0f) { return; }
             JumpAction();
         }
