@@ -6558,6 +6558,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: Small Mushroom FBX 2 (8)
       objectReference: {fileID: 0}
+    - target: {fileID: 6389486658350424374, guid: 8d47b356ce43fe74f968142506ad0ca9, type: 3}
+      propertyPath: m_Size.x
+      value: 0.0043989774
+      objectReference: {fileID: 0}
+    - target: {fileID: 6389486658350424374, guid: 8d47b356ce43fe74f968142506ad0ca9, type: 3}
+      propertyPath: m_Size.y
+      value: 0.0242741
+      objectReference: {fileID: 0}
+    - target: {fileID: 6389486658350424374, guid: 8d47b356ce43fe74f968142506ad0ca9, type: 3}
+      propertyPath: m_Size.z
+      value: 0.0038701561
+      objectReference: {fileID: 0}
+    - target: {fileID: 6389486658350424374, guid: 8d47b356ce43fe74f968142506ad0ca9, type: 3}
+      propertyPath: m_Center.x
+      value: -0.00023347141
+      objectReference: {fileID: 0}
+    - target: {fileID: 6389486658350424374, guid: 8d47b356ce43fe74f968142506ad0ca9, type: 3}
+      propertyPath: m_Center.z
+      value: -0.000021836811
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

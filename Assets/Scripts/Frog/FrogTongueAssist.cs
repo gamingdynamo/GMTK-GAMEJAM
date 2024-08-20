@@ -33,14 +33,18 @@ public class FrogTongueAssist : MonoBehaviour
         {
             closestTarget = null;
         }
-        if (closestTarget == null) 
-        { 
-            lookSignTrans.gameObject.SetActive(false);
-        }
-        else
+        RaycastHit hit;
+        if (closestTarget != null 
+            && Physics.Raycast(transform.position, (closestTarget.position - transform.position).normalized, out hit, FrogBehaviour.Instance.GetTongueLength())
+            && hit.transform == closestTarget)
         {
             lookSignTrans.gameObject.SetActive(true);
             SetLookSignPosition();
+        }
+        else
+        {
+            lookSignTrans.gameObject.SetActive(false);
+            closestTarget = null;
         }
 
     }
