@@ -13,6 +13,7 @@ public class MainMenu : MonoBehaviour
     private UIDocument uiDocument;
     private Button startButton;
     private Button settingsButton;
+    private Button creditsButton;
     private Button exitButton;
     private Button backButton;
     private Button saveButton;
@@ -49,6 +50,7 @@ public class MainMenu : MonoBehaviour
 
         startButton = root.Q<Button>("start-button");
         settingsButton = root.Q<Button>("settings-button");
+        creditsButton = root.Q<Button>("credits-button");
         exitButton = root.Q<Button>("exit-button");
         backButton = root.Q<Button>("back-button");
         saveButton = root.Q<Button>("save-button");
@@ -72,6 +74,7 @@ public class MainMenu : MonoBehaviour
 
         startButton.clicked += StartGame;
         settingsButton.clicked += OpenSettings;
+        creditsButton.clicked += OpenCredits;
         exitButton.clicked += ExitGame;
         backButton.clicked += OpenMainMenu;
         saveButton.clicked += ApplySettings;
@@ -92,6 +95,7 @@ public class MainMenu : MonoBehaviour
     {
         startButton.clicked -= StartGame;
         settingsButton.clicked -= OpenSettings;
+        creditsButton.clicked -= OpenCredits;
         exitButton.clicked -= ExitGame;
         backButton.clicked -= OpenMainMenu;
         saveButton.clicked -= ApplySettings;
@@ -110,6 +114,10 @@ public class MainMenu : MonoBehaviour
         mainMenuPanel.style.display = DisplayStyle.None;
         optionPanel.style.display = DisplayStyle.Flex;
         LoadCurrentSettings();
+    }
+    private void OpenCredits()
+    {
+        SceneManager.LoadScene("Credits");
     }
 
     private void OpenMainMenu()

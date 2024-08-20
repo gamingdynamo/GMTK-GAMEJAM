@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
-using UnityEditor.MemoryProfiler;
+// using UnityEditor.MemoryProfiler;
 using UnityEngine;
 
 public class HUDHandler : MonoBehaviour
@@ -39,6 +39,7 @@ public class HUDHandler : MonoBehaviour
         OverlayHUD.SetActive(!Pause);
         Cursor.lockState = Pause ? CursorLockMode.None : CursorLockMode.Locked;
         Cursor.visible = Pause;
+        FrogBehaviour.Instance.SetLockOnActive(!Pause);
         InputHandler.Instance.EnablePlayerControl(!Pause);
     }
 
