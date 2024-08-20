@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour
           
             flyCount = value;
             FlyRequired = FlyNeeded - flyCount;
+            if (HUDHandler.Instance == null) { return; }
             HUDHandler.Instance.UpdateHUD();
         }
     }
