@@ -59,6 +59,7 @@ public class HUDHandler : MonoBehaviour
         WinScreen.SetActive(false);
         PauseMenu.SetActive(false);
         Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
         Pause = false;
         InputHandler.Instance.EnablePlayerControl(true);
         InputHandler.Instance.ControlsActive(false);
