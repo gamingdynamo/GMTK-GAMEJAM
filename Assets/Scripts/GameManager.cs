@@ -43,6 +43,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        InputHandler.Instance.ControlsActive(false);
         FlyRequired = FlyNeeded;
     }
 

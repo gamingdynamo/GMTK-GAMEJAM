@@ -108,6 +108,7 @@ public class FlyBrain : Tonguable
 
     private void GetRoamLocation()
     {
+        if (hoverZone == null) { return; }
         targetLocationInSphere.x = Random.Range(0, HoverRaduis);
         targetLocationInSphere.y = Random.Range(0, HoverRaduis - targetLocationInSphere.x);
         targetLocationInSphere.z = Random.Range(0, HoverRaduis - targetLocationInSphere.y);

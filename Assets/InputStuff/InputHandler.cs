@@ -85,11 +85,10 @@ public class InputHandler : MonoBehaviour
 
     private void OnOffPause()
     {
-        if (HUDHandler.Instance == null) { return; }
-        EnablePlayerControl(HUDHandler.Instance.ChangePauseState());
+        HUDHandler.Instance.ChangePauseState();
     }
 
-    private void FocusCursor()
+    public void FocusCursor()
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
@@ -106,7 +105,7 @@ public class InputHandler : MonoBehaviour
     }
 
 
-    private void OnEnable()
+    /*private void OnEnable()
     {
         playerInputs.Enable();
     }
@@ -115,9 +114,9 @@ public class InputHandler : MonoBehaviour
     {
         playerInputs.Disable();
 
-    }
+    }*/
 
-    private void EnablePlayerControl(bool tF)
+    public void EnablePlayerControl(bool tF)
     {
         if (tF)
         {
