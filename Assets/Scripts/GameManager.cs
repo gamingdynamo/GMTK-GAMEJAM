@@ -7,22 +7,22 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
 
-    [SerializeField] private GameObject PauseMain;
-    private bool togglePauseMenu = false;
-
     #region HUD
+    [SerializeField]private int FlyNeeded;
+    [HideInInspector]public int FlyRequired;
     private int flyCount;
     public int FlyCount
     {
         get { return flyCount; }
         set
         {
+          
             flyCount = value;
-            UpdateHUD();
+            FlyRequired = FlyNeeded - flyCount;
+            HUDHandler.Instance.UpdateHUD();
         }
     }
 
-    [SerializeField] private TextMeshProUGUI FlyCountText;
     #endregion
 
     private void Awake()
@@ -39,7 +39,10 @@ public class GameManager : MonoBehaviour
         }
     }
 
-
+    private void Start()
+    {
+        FlyRequired = FlyNeeded;
+    }
 
 
     public static float VectorToAngle(Vector2 dir)
@@ -53,18 +56,7 @@ public class GameManager : MonoBehaviour
     }
 
 
-    private void UpdateHUD()
-    {
-        FlyCountText.text = flyCount.ToString();
-    }
+    
 
-    public void ShowPauseMenu()
-    {   
-        togglePauseMenu = !togglePauseMenu;
-        Cursor.lockState = togglePauseMenu ? CursorLockMode.None : CursorLockMode.Locked;
-        Cursor.visible = togglePauseMenu;
-        Time.timeScale = togglePauseMenu ? 0.0f : 1.0f;
-        if (PauseMain == null) { return; }
-        PauseMain.SetActive(togglePauseMenu);
-    }
+    
 }
