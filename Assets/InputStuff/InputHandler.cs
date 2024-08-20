@@ -32,7 +32,7 @@ public class InputHandler : MonoBehaviour
         playerInputs.Player.Jump.started += context => Jump();
         playerInputs.Player.Jump.canceled += context => JumpCancel();
         playerInputs.Player.Tongue.started += context => ShootTongue();
-        playerInputs.Player.Pause.started += context => PauseGame();
+        //playerInputs.Player.Pause.started += context => PauseGame();
         //playerInputs.Player.FocusButton.started += context => CursorState();
         
         //If we want grapple or pull with tongue maybe we need this. I Just comment it for now.
@@ -44,19 +44,9 @@ public class InputHandler : MonoBehaviour
 
     }
 
-    private void CursorState()
-    {
-        
-        
-        
-    }
+   
 
-    private void PauseGame()
-    {
-        
-        GameManager.Instance.ShowPauseMenu();
-
-    }
+   
 
 
     private void Move(InputAction.CallbackContext context)
