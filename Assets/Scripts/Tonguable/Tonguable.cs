@@ -6,20 +6,17 @@ public class Tonguable : MonoBehaviour
 {
     private TongueBehaviour tongueBehave;
     public TongueBehaviour TongueBehave {  get { return tongueBehave; } set { tongueBehave = value; } }
-    private bool tongued = false;
-    public bool Tongued { get { return tongued; } set { tongued = value; } }
+    
 
     public virtual void GotTongued()
     {
         if (TongueBehave == null) { return; }
         TongueBehave.SetTonguePullTarget(this);
-        tongued = true;
     }
     
     public virtual void GotRetrieved()
     {
         FrogBehaviour.Instance.UpgradeFrog(FlyUpgradeType.AllType);
-        GameManager.Instance.FlyCount++;
         Destroy(gameObject);
     }
 }

@@ -61,22 +61,34 @@ public class InputHandler : MonoBehaviour
 
     private void Move(InputAction.CallbackContext context)
     {
-        FrogBehaviour.Instance.FrogWalkStart(context.ReadValue<Vector2>().normalized);
+        if (FrogBehaviour.Instance != null)
+        {
+            FrogBehaviour.Instance.FrogWalkStart(context.ReadValue<Vector2>().normalized);
+        }
     }
 
     private void Jump()
     {
-        FrogBehaviour.Instance.Jump();
+        if (FrogBehaviour.Instance != null)
+        {
+            FrogBehaviour.Instance.Jump();
+        }
     }
 
     private void JumpCancel()
     {
-        FrogBehaviour.Instance.JumpStop();
+        if (FrogBehaviour.Instance != null)
+        {
+            FrogBehaviour.Instance.JumpStop();
+        }
     }
 
     private void ShootTongue()
     {
-        FrogBehaviour.Instance.ShootTongue();
+        if (FrogBehaviour.Instance != null)
+        {
+            FrogBehaviour.Instance.ShootTongue();
+        }
     }
 
 

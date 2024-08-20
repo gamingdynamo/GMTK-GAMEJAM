@@ -824,9 +824,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   upgradeType: 0
-  behaveMode: 0
-  flyScriptObj: {fileID: 11400000, guid: 5bcab2bf8e8fcee48b04269ec0509276, type: 2}
-  targetTrans: {fileID: 0}
 --- !u!54 &2248289707780822744
 Rigidbody:
   m_ObjectHideFlags: 0

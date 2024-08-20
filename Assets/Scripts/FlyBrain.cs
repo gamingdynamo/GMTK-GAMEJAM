@@ -5,7 +5,7 @@ using System.Runtime.CompilerServices;
 using UnityEditor.VersionControl;
 using UnityEngine;
 
-public class FlyBrain : MonoBehaviour
+public class FlyBrain : Tonguable
 {
     private const float Tau = 6.284f;
 
@@ -88,7 +88,7 @@ public class FlyBrain : MonoBehaviour
     private async void Idle()
     {
         await Awaitable.WaitForSecondsAsync(Random.Range(min_idleTime,max_idleTime));
-        Debug.Log("ss");
+        //Debug.Log("ss");
 
         GetRoamLocation();
         ChangebugState(FlyState.Roaming);
