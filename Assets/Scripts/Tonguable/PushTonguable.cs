@@ -20,6 +20,24 @@ public class PushTonguable : Tonguable
         if (rig == null) { rig = GetComponent<Rigidbody>(); }
     }
 
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.transform.CompareTag("Frog"))
+        {
+            if (pushScriptObj.IsMovable) { return; }
+            rig.isKinematic = true;
+        }
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        if (collision.transform.CompareTag("Frog"))
+        {
+            if (pushScriptObj.IsMovable) { return; }
+            rig.isKinematic = false;
+        }
+    }
+
     public override void GotTongued()
     {
         if (FrogBehaviour.Instance.FrogTongueLevel < pushScriptObj.PushRequiredLevel) { return; }
