@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: PushLevelTonguableScriptableObject 1
   m_EditorClassIdentifier: 
   PushRequiredLevel: 0
-  PushForce: 5
-  PushIncreaseSize: 0.1
-  MaxSize: 1
+  PushForce: 3
+  PushIncreaseSize: 0.2
+  MaxSize: 2
   IsMovable: 0
