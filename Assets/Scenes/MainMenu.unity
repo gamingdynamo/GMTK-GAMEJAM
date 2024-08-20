@@ -167,10 +167,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6667045285476946243, guid: ee9c6f73b79ea2d4797d8f5c5c207079, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: ChangePauseState
-      objectReference: {fileID: 0}
     - target: {fileID: 7231457389537765047, guid: ee9c6f73b79ea2d4797d8f5c5c207079, type: 3}
       propertyPath: m_Name
       value: GameManager
