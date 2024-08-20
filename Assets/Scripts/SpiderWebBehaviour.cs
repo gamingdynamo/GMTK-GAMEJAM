@@ -9,7 +9,9 @@ public class SpiderWebBehaviour : MonoBehaviour
     [SerializeField]
     private Animator spiderWebAnmt;
     [SerializeField]
-    private int webBreakSizeLevel = 0;
+    private Transform foodParentTrans;
+    [SerializeField]
+    private Transform popUpLocation;
     [HideInInspector]
     public float webBounceYPos = 0.0f;
 
@@ -17,7 +19,7 @@ public class SpiderWebBehaviour : MonoBehaviour
     {
         if (other.CompareTag("FrogGroundCheck"))
         {
-            if (FrogBehaviour.Instance.FrogScaleLevel >= webBreakSizeLevel)
+            if (FrogBehaviour.Instance.FrogScaleLevel >= GameManager.Instance.FlyNeeded)
             {
                 FrogBreak();
                 return;
@@ -34,6 +36,12 @@ public class SpiderWebBehaviour : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        GameManager.Instance.FlyNeeded = foodParentTrans.childCount;
+        GameManager.Instance.FlyCount = 0;
+    }
+
     private void Update()
     {
         spiderWebMat.SetFloat("_WebBounceYPos", webBounceYPos);
@@ -42,15 +50,25 @@ public class SpiderWebBehaviour : MonoBehaviour
     public void FrogDrop()
     {
         spiderWebAnmt.SetTrigger("FrogDrop");
+        HUDHandler.Instance.ShowPopUpHud(popUpLocation.position);
     }
 
     public void FrogJump()
     {
         spiderWebAnmt.SetTrigger("FrogJump");
+        HUDHandler.Instance.HidePopUpHud();
     }
 
     public void FrogBreak()
     {
         spiderWebAnmt.SetTrigger("FrogBreak");
+        FinishLevel();
+    }
+
+    public void FinishLevel()
+    {
+        InputHandler.Instance.ControlsActive(false);
+        FrogBehaviour.Instance.FinishLevel();
+        HUDHandler.Instance.FinishLevel();
     }
 }

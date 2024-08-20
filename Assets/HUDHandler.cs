@@ -5,38 +5,73 @@ using UnityEngine;
 
 public class HUDHandler : MonoBehaviour
 {
-    public static HUDHandler Instance;
+    public static HUDHandler Instance { get; private set; }
     [SerializeField] private GameObject PauseMenu;
     [SerializeField] private GameObject OverlayHUD;
+    [SerializeField] private GameObject WinScreen;
     [SerializeField] private TextMeshProUGUI FlyCount;
+    [SerializeField]
+    private PopUpHUD popUpHUD;
     private bool Pause = false;
     // Start is called before the first frame update
     void Start()
     {
-        if (Instance == null)
+        if (Instance != null) 
         {
-            Instance = this;
+            Destroy(gameObject);
+            return;
         }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        Instance = this;
     }
 
     public void UpdateHUD()
     {
         FlyCount.text = GameManager.Instance.FlyCount.ToString();
+        UpdatePopUpMessage();
     }
 
-    public void ChangePauseState()
+    public bool ChangePauseState()
     {
         Pause = !Pause;
         Time.timeScale = Pause ? 0 : 1;
         PauseMenu.SetActive(Pause);
         OverlayHUD.SetActive(!Pause);
-        Cursor.lockState = Pause ? CursorLockMode.None : CursorLockMode.Confined;
+        Cursor.lockState = Pause ? CursorLockMode.None : CursorLockMode.Locked;
         Cursor.visible = Pause;
+        return Pause;
+    }
+
+    public void FinishLevel()
+    {
+        OverlayHUD.SetActive(false);
+        WinScreen.SetActive(true);
+        Invoke(nameof(BackMainMenu), 3.0f);
+    }
+
+    public void StartLevel()
+    {
+        OverlayHUD.SetActive(true);
+    }
+
+    public void BackMainMenu()
+    {
+        WinScreen.SetActive(false);
+        GameManager.Instance.LoadScene(0);
+    }
+
+    public void ShowPopUpHud(Vector3 popUpLocation)
+    {
+        popUpHUD.ShowPopUpHud(popUpLocation);
+        UpdatePopUpMessage();
+    }
+    
+    public void UpdatePopUpMessage()
+    {
+        popUpHUD.UpdatePopupMessage(GameManager.Instance.FlyRequired + " More " + (GameManager.Instance.FlyRequired > 1 ? "Flies" : "Fly") + " Needed");
+    }
+
+    public void HidePopUpHud()
+    {
+        popUpHUD.HidePopUpHudDummy();
     }
 }

@@ -121,6 +121,22 @@ PrefabInstance:
       propertyPath: 'lookSignImages.Array.data[3]'
       value: 
       objectReference: {fileID: 5653609199255260183}
+    - target: {fileID: 8078659291379807203, guid: 1d98cafa5dc84d442bf198589b720ff1, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8078659291379807203, guid: 1d98cafa5dc84d442bf198589b720ff1, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8078659291379807203, guid: 1d98cafa5dc84d442bf198589b720ff1, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8078659291379807203, guid: 1d98cafa5dc84d442bf198589b720ff1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 9200822114111136111, guid: 1d98cafa5dc84d442bf198589b720ff1, type: 3}
       propertyPath: m_Name
       value: FrogUtilitiesParent
@@ -327,6 +343,10 @@ PrefabInstance:
       propertyPath: aimAssist
       value: 
       objectReference: {fileID: 6145140477726986212}
+    - target: {fileID: 748379430159380902, guid: 730001641a15e2f469d083af39ceacec, type: 3}
+      propertyPath: frogColid
+      value: 
+      objectReference: {fileID: 8594937651947279516}
     - target: {fileID: 748379430159380902, guid: 730001641a15e2f469d083af39ceacec, type: 3}
       propertyPath: frogTongue
       value: 
@@ -670,6 +690,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!65 &8594937651947279516 stripped
+BoxCollider:
+  m_CorrespondingSourceObject: {fileID: 1942988097862092581, guid: 730001641a15e2f469d083af39ceacec, type: 3}
+  m_PrefabInstance: {fileID: 7904304570431656889}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &8610087093899371676 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1931085153411495717, guid: 730001641a15e2f469d083af39ceacec, type: 3}

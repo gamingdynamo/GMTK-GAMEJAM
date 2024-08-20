@@ -113,4 +113,10 @@ public class FlyBrain : Tonguable
         targetLocationInSphere.z = Random.Range(0, HoverRaduis - targetLocationInSphere.y);
         targetLocationInSphere += hoverZone.position - (Vector3.one * approximate_player_size);
     }
+
+    public override void GotRetrieved()
+    {
+        GameManager.Instance.FlyCount++;
+        base.GotRetrieved();
+    }
 }

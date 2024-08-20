@@ -14,6 +14,8 @@ public class FrogBehaviour : MonoBehaviour
     [SerializeField]
     private Animator frogAnmt;
     [SerializeField]
+    private Collider frogColid;
+    [SerializeField]
     private TongueBehaviour frogTongue;
     [SerializeField]
     private FrogTongueAssist aimAssist;
@@ -368,5 +370,11 @@ public class FrogBehaviour : MonoBehaviour
     {
         frogAnmt.speed = playSpeed;
         frogAnmt.SetTrigger(parm);
+    }
+
+    public void FinishLevel()
+    {
+        frogColid.enabled = false;
+
     }
 }

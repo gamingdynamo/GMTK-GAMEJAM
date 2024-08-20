@@ -236,7 +236,7 @@ GameObject:
   m_Component:
   - component: {fileID: 18912495}
   m_Layer: 0
-  m_Name: TonguableParent
+  m_Name: FoodParent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2106,6 +2106,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2082381314}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &593270718
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 593270719}
+  m_Layer: 0
+  m_Name: PopUpLocation
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &593270719
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 593270718}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 57.989265, y: -9.054138, z: 117.645424}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &605378848
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2298,6 +2329,14 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 16.26
       objectReference: {fileID: 0}
+    - target: {fileID: 179668944336273584, guid: cebefcdacae24e349a0663087d91ff00, type: 3}
+      propertyPath: popUpLocation
+      value: 
+      objectReference: {fileID: 593270719}
+    - target: {fileID: 179668944336273584, guid: cebefcdacae24e349a0663087d91ff00, type: 3}
+      propertyPath: foodParentTrans
+      value: 
+      objectReference: {fileID: 18912495}
     - target: {fileID: 179668944336273584, guid: cebefcdacae24e349a0663087d91ff00, type: 3}
       propertyPath: webBreakSizeLevel
       value: 10
@@ -7645,4 +7684,5 @@ SceneRoots:
   - {fileID: 2082381314}
   - {fileID: 18912495}
   - {fileID: 910194238419618282}
+  - {fileID: 593270719}
   - {fileID: 3258977837497806597}
