@@ -15,4 +15,5 @@ MonoBehaviour:
   PushRequiredLevel: 0
   PushForce: 5
   PushIncreaseSize: 0.1
-  MaxSize: 2
+  MaxSize: 1
+  IsMovable: 0

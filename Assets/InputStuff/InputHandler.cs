@@ -8,7 +8,7 @@ using UnityEngine.InputSystem;
 public class InputHandler : MonoBehaviour
 {
     PlayerInputs playerInputs;
-    public static InputHandler Instance;
+    public static InputHandler Instance { get; private set; }
     /*/// <summary>
     /// if jump is being pressed
     /// </summary>
@@ -24,39 +24,31 @@ public class InputHandler : MonoBehaviour
     public Vector3 mousedelta;
     void Awake()
     {   
-        if(Instance == null)
+        if (Instance != null)
         {
-            Instance = this;
+            Destroy(gameObject);
+            return;
         }
+        Instance = this;
         playerInputs = new PlayerInputs();
         playerInputs.Player.Jump.started += context => Jump();
         playerInputs.Player.Jump.canceled += context => JumpCancel();
         playerInputs.Player.Tongue.started += context => ShootTongue();
-        playerInputs.Player.Pause.started += context => PauseGame();
+        //playerInputs.Player.Pause.started += context => PauseGame();
         //playerInputs.Player.FocusButton.started += context => CursorState();
         
         //If we want grapple or pull with tongue maybe we need this. I Just comment it for now.
         //playerInputs.Player.Tongue.canceled += context => { TongueOut = false; };
         playerInputs.Player.Move.performed += context => Move(context);
         playerInputs.Player.Move.canceled += context => Move(context);
-
-
-
+        playerInputs.Player.Pause.started += context => OnOffPause();
+        playerInputs.Player.FocusButton.started += context => FocusCursor();
+        playerInputs.Menu.Unpause.started += context => OnOffPause();
     }
 
-    private void CursorState()
-    {
-        
-        
-        
-    }
+   
 
-    private void PauseGame()
-    {
-        
-        GameManager.Instance.ShowPauseMenu();
-
-    }
+   
 
 
     private void Move(InputAction.CallbackContext context)
@@ -91,6 +83,19 @@ public class InputHandler : MonoBehaviour
         }
     }
 
+    private void OnOffPause()
+    {
+        if (HUDHandler.Instance == null) { return; }
+        EnablePlayerControl(HUDHandler.Instance.ChangePauseState());
+    }
+
+    private void FocusCursor()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+    }
+
+
 
     // Update is called once per frame
     void Update()
@@ -112,15 +117,35 @@ public class InputHandler : MonoBehaviour
 
     }
 
+    private void EnablePlayerControl(bool tF)
+    {
+        if (tF)
+        {
+            playerInputs.Player.Enable();
+            playerInputs.Menu.Disable();
+            
+        }
+        else
+        {
+            playerInputs.Player.Disable();
+            playerInputs.Menu.Enable();
+        }
+    }
+
     /// <summary>
     /// For disabling the player controller
     /// </summary>
     /// <param name="isActive"></param>
     public void ControlsActive(bool isActive = true)
     {
-        if (isActive) { 
-            playerInputs.Enable(); 
+        if (isActive)
+        {
+            playerInputs.Enable();
+            EnablePlayerControl(isActive);
         }
-        playerInputs.Disable();
+        else
+        {
+            playerInputs.Disable();
+        }
     }
 }

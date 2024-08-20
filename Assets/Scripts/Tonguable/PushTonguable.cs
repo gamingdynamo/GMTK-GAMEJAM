@@ -8,6 +8,7 @@ public class PushTonguable : Tonguable
     private Rigidbody rig;
     [SerializeField]
     private PushTonguableScriptableObject pushScriptObj;
+    public PushTonguableScriptableObject PushScriptObj { get { return pushScriptObj; } }
 
     private void Start()
     {

@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86eba48074eef9948aa696acca54b7a8, type: 3}
   m_Name: PushTonguableScriptableObject
   m_EditorClassIdentifier: 
-  PushRequiredLevel: 0
+  PushRequiredLevel: 2
   PushForce: 5
   PushIncreaseSize: 0
   MaxSize: 2
-  IsMovable: 1
+  IsMovable: 0

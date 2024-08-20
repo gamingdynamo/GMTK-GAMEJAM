@@ -2,27 +2,29 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
 
-    [SerializeField] private GameObject PauseMain;
-    private bool togglePauseMenu = false;
-
     #region HUD
+    [HideInInspector]public int FlyNeeded;
+    [HideInInspector]public int FlyRequired;
     private int flyCount;
     public int FlyCount
     {
         get { return flyCount; }
         set
         {
+          
             flyCount = value;
-            UpdateHUD();
+            FlyRequired = FlyNeeded - flyCount;
+            if (HUDHandler.Instance == null) { return; }
+            HUDHandler.Instance.UpdateHUD();
         }
     }
 
-    [SerializeField] private TextMeshProUGUI FlyCountText;
     #endregion
 
     private void Awake()
@@ -39,7 +41,10 @@ public class GameManager : MonoBehaviour
         }
     }
 
-
+    private void Start()
+    {
+        FlyRequired = FlyNeeded;
+    }
 
 
     public static float VectorToAngle(Vector2 dir)
@@ -51,20 +56,10 @@ public class GameManager : MonoBehaviour
     {
         return new Vector2(Mathf.Sin(Mathf.Deg2Rad * angle), Mathf.Cos(Mathf.Deg2Rad * angle));
     }
-
-
-    private void UpdateHUD()
+    
+    public void LoadScene(int sceneID)
     {
-        FlyCountText.text = flyCount.ToString();
+        SceneManager.LoadScene(sceneID);
     }
-
-    public void ShowPauseMenu()
-    {   
-        togglePauseMenu = !togglePauseMenu;
-        Cursor.lockState = togglePauseMenu ? CursorLockMode.None : CursorLockMode.Locked;
-        Cursor.visible = togglePauseMenu;
-        Time.timeScale = togglePauseMenu ? 0.0f : 1.0f;
-        if (PauseMain == null) { return; }
-        PauseMain.SetActive(togglePauseMenu);
-    }
+    
 }
