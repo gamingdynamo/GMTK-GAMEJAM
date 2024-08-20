@@ -40,7 +40,6 @@ public class FrogScriptableObject : ScriptableObject
     public float FrogTongueLengthIncreaseAmount = 0.5f;
 
     [Header("Frog Animation")]
-    public float FrogHopAnimationSpeed = 2.0f;
-    public float FrogJumpAnimationSpeed = 0.5f;
+    public float JumpAnimationStopTime = 0.2f;
 
 }

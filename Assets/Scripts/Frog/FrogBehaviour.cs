@@ -41,6 +41,7 @@ public class FrogBehaviour : MonoBehaviour
     private float frogWalkTimer = 0.0f;
 
     private bool frogOnGround = false;
+    private bool isJumped = false;
     private float leaveGroundTimer = 0.0f;
     private float jumpInputTimer = 0.0f;
     private float jumpTimer = 0.0f;
@@ -95,7 +96,7 @@ public class FrogBehaviour : MonoBehaviour
     private void FrogFaceDirection(Vector2 dir)
     {
         if (dir ==  Vector2.zero) { return; }
-        transform.rotation = Quaternion.Euler(0.0f, 180.0f + GameManager.VectorToAngle(dir), 0.0f);
+        transform.rotation = Quaternion.Euler(0.0f, GameManager.VectorToAngle(dir), 0.0f);
     }
 
     //Called by inputhandler Move
@@ -115,7 +116,9 @@ public class FrogBehaviour : MonoBehaviour
             frogCurrWalkState++;
             frogWalkTimer = 0.0f;
             frogWalkPastTime = 0.0f;
-            TriggerAnimation("Hop", frogScripObj.FrogHopAnimationSpeed);
+            frogAnmt.Play("Idle");
+            frogAnmt.speed = 1.0f;
+            frogAnmt.SetTrigger("Hop");
         }
         else
         {
@@ -177,6 +180,11 @@ public class FrogBehaviour : MonoBehaviour
         if (tf)
         {
             frogRig.velocity = new Vector3(0.0f, frogRig.velocity.y, 0.0f);
+            if (isJumped)
+            {
+                frogAnmt.speed = 1.0f;
+            }
+            isJumped = false;
             if (jumpInputTimer <= 0.0f) { return; }
             JumpAction();
         }
@@ -203,10 +211,19 @@ public class FrogBehaviour : MonoBehaviour
         frogRig.useGravity = false;
         jumpTimer = GetJumpTime();
         jumpDirection = inputDirection == Vector2.zero ? Vector2.zero : CameraInputDirection();
+        frogAnmt.Play("Idle");
+        frogAnmt.SetTrigger("Jump");
+        Invoke(nameof(JumpAnimationStop), FrogScripObj.JumpAnimationStopTime);
+        isJumped = true;
         if (inputDirection != Vector2.zero)
         {
             FrogFaceDirection(CameraInputDirection());
         }
+    }
+
+    public void JumpAnimationStop()
+    {
+        frogAnmt.speed = 0.0f;
     }
 
     public void JumpAction(float hookRushTime, Vector3 hookRushVelocity)
@@ -265,9 +282,12 @@ public class FrogBehaviour : MonoBehaviour
     public void ShootTongue()
     {
         if (frogWalkDirection != Vector3.zero || shootingTongue) { return; }
+        if (!isJumped)
+        {
+            frogAnmt.SetBool("Shooting", true);
+        }
         FrogFaceDirection(new Vector2(CameraMain.transform.forward.x, CameraMain.transform.forward.z));
         shootingTongue = true;
-        frogAnmt.SetBool("Shooting", true);
         Invoke(nameof(TongueShotFinish), (frogScripObj.FrogTongueShootTime + frogScripObj.FrogTongueHoldTime + frogScripObj.FrogTongueRetrieveTime));
         Tonguable target = aimAssist.LockInTarget();
         if (target != null)
@@ -288,8 +308,8 @@ public class FrogBehaviour : MonoBehaviour
 
     public void TongueShotFinish()
     {
-        shootingTongue = false;
         frogAnmt.SetBool("Shooting", false);
+        shootingTongue = false;
     }
 
     private Vector2 CameraInputDirection()
@@ -363,13 +383,6 @@ public class FrogBehaviour : MonoBehaviour
     public float GetTongueLength()
     {
         return frogScripObj.FrogTongueMaxLength + frogScripObj.FrogTongueLengthIncreaseAmount * frogTongueLevel;
-    }
-
-
-    private void TriggerAnimation(string parm, float playSpeed)
-    {
-        frogAnmt.speed = playSpeed;
-        frogAnmt.SetTrigger(parm);
     }
 
     public void FinishLevel()
