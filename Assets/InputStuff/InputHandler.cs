@@ -8,7 +8,7 @@ using UnityEngine.InputSystem;
 public class InputHandler : MonoBehaviour
 {
     PlayerInputs playerInputs;
-    public static InputHandler Instance;
+    public static InputHandler Instance { get; private set; }
     /*/// <summary>
     /// if jump is being pressed
     /// </summary>
@@ -24,10 +24,12 @@ public class InputHandler : MonoBehaviour
     public Vector3 mousedelta;
     void Awake()
     {   
-        if(Instance == null)
+        if (Instance != null)
         {
-            Instance = this;
+            Destroy(gameObject);
+            return;
         }
+        Instance = this;
         playerInputs = new PlayerInputs();
         playerInputs.Player.Jump.started += context => Jump();
         playerInputs.Player.Jump.canceled += context => JumpCancel();
@@ -39,9 +41,9 @@ public class InputHandler : MonoBehaviour
         //playerInputs.Player.Tongue.canceled += context => { TongueOut = false; };
         playerInputs.Player.Move.performed += context => Move(context);
         playerInputs.Player.Move.canceled += context => Move(context);
-
-
-
+        playerInputs.Player.Pause.started += context => OnOffPause();
+        playerInputs.Player.FocusButton.started += context => FocusCursor();
+        playerInputs.Menu.Unpause.started += context => OnOffPause();
     }
 
    
@@ -81,6 +83,18 @@ public class InputHandler : MonoBehaviour
         }
     }
 
+    private void OnOffPause()
+    {
+        HUDHandler.Instance.ChangePauseState();
+    }
+
+    public void FocusCursor()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+    }
+
+
 
     // Update is called once per frame
     void Update()
@@ -91,7 +105,7 @@ public class InputHandler : MonoBehaviour
     }
 
 
-    private void OnEnable()
+    /*private void OnEnable()
     {
         playerInputs.Enable();
     }
@@ -100,6 +114,21 @@ public class InputHandler : MonoBehaviour
     {
         playerInputs.Disable();
 
+    }*/
+
+    public void EnablePlayerControl(bool tF)
+    {
+        if (tF)
+        {
+            playerInputs.Player.Enable();
+            playerInputs.Menu.Disable();
+            
+        }
+        else
+        {
+            playerInputs.Player.Disable();
+            playerInputs.Menu.Enable();
+        }
     }
 
     /// <summary>
@@ -108,9 +137,14 @@ public class InputHandler : MonoBehaviour
     /// <param name="isActive"></param>
     public void ControlsActive(bool isActive = true)
     {
-        if (isActive) { 
-            playerInputs.Enable(); 
+        if (isActive)
+        {
+            playerInputs.Enable();
+            EnablePlayerControl(isActive);
         }
-        playerInputs.Disable();
+        else
+        {
+            playerInputs.Disable();
+        }
     }
 }

@@ -133,6 +133,7 @@ public class FlyTonguable : Tonguable
 
     public override void GotRetrieved()
     {
+        GameManager.Instance.FlyCount++;
         FrogBehaviour.Instance.UpgradeFrog(upgradeType);
         Destroy(gameObject);
     }

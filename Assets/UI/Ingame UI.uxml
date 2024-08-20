@@ -1,0 +1,8 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI%20Toolkit/in-game%20theme.uss?fileID=7433441132597879392&amp;guid=462afda354be33dc7aef48530efeff8e&amp;type=3#in-game theme" />
+    <ui:VisualElement style="flex-grow: 1;">
+        <ui:ListView name="ListView" />
+        <ui:Button text="To Main Menu" name="main-menu-button" class="in-game-button" style="padding-right: 12px; margin-right: 209px; width: auto; min-width: 20%; max-width: 30%; align-items: auto; justify-content: flex-start; align-self: flex-start; -unity-text-align: middle-right; white-space: normal;" />
+        <ui:Label text="Health" />
+    </ui:VisualElement>
+</ui:UXML>

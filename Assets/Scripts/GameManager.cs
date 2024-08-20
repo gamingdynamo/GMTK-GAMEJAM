@@ -2,13 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
 
     #region HUD
-    [SerializeField]private int FlyNeeded;
+    [HideInInspector]public int FlyNeeded;
     [HideInInspector]public int FlyRequired;
     private int flyCount;
     public int FlyCount
@@ -19,6 +20,7 @@ public class GameManager : MonoBehaviour
           
             flyCount = value;
             FlyRequired = FlyNeeded - flyCount;
+            if (HUDHandler.Instance == null) { return; }
             HUDHandler.Instance.UpdateHUD();
         }
     }
@@ -41,6 +43,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        InputHandler.Instance.ControlsActive(false);
         FlyRequired = FlyNeeded;
     }
 
@@ -54,9 +57,10 @@ public class GameManager : MonoBehaviour
     {
         return new Vector2(Mathf.Sin(Mathf.Deg2Rad * angle), Mathf.Cos(Mathf.Deg2Rad * angle));
     }
-
-
     
-
+    public void LoadScene(int sceneID)
+    {
+        SceneManager.LoadScene(sceneID);
+    }
     
 }

@@ -14,6 +14,8 @@ public class FrogBehaviour : MonoBehaviour
     [SerializeField]
     private Animator frogAnmt;
     [SerializeField]
+    private Collider frogColid;
+    [SerializeField]
     private TongueBehaviour frogTongue;
     [SerializeField]
     private FrogTongueAssist aimAssist;
@@ -174,6 +176,7 @@ public class FrogBehaviour : MonoBehaviour
         frogOnGround = tf;
         if (tf)
         {
+            frogRig.velocity = new Vector3(0.0f, frogRig.velocity.y, 0.0f);
             if (jumpInputTimer <= 0.0f) { return; }
             JumpAction();
         }
@@ -367,5 +370,11 @@ public class FrogBehaviour : MonoBehaviour
     {
         frogAnmt.speed = playSpeed;
         frogAnmt.SetTrigger(parm);
+    }
+
+    public void FinishLevel()
+    {
+        frogColid.enabled = false;
+
     }
 }
