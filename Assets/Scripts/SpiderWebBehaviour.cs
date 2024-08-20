@@ -40,6 +40,10 @@ public class SpiderWebBehaviour : MonoBehaviour
     {
         GameManager.Instance.FlyNeeded = foodParentTrans.childCount;
         GameManager.Instance.FlyCount = 0;
+        Time.timeScale = 1.0f;
+        HUDHandler.Instance.StartLevel();
+        InputHandler.Instance.ControlsActive(true);
+        InputHandler.Instance.FocusCursor();
     }
 
     private void Update()

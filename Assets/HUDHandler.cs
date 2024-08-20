@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using UnityEditor.MemoryProfiler;
 using UnityEngine;
 
 public class HUDHandler : MonoBehaviour
@@ -30,7 +31,7 @@ public class HUDHandler : MonoBehaviour
         UpdatePopUpMessage();
     }
 
-    public bool ChangePauseState()
+    public void ChangePauseState()
     {
         Pause = !Pause;
         Time.timeScale = Pause ? 0 : 1;
@@ -38,7 +39,7 @@ public class HUDHandler : MonoBehaviour
         OverlayHUD.SetActive(!Pause);
         Cursor.lockState = Pause ? CursorLockMode.None : CursorLockMode.Locked;
         Cursor.visible = Pause;
-        return Pause;
+        InputHandler.Instance.EnablePlayerControl(!Pause);
     }
 
     public void FinishLevel()
@@ -56,6 +57,11 @@ public class HUDHandler : MonoBehaviour
     public void BackMainMenu()
     {
         WinScreen.SetActive(false);
+        PauseMenu.SetActive(false);
+        Cursor.visible = true;
+        Pause = false;
+        InputHandler.Instance.EnablePlayerControl(true);
+        InputHandler.Instance.ControlsActive(false);
         GameManager.Instance.LoadScene(0);
     }
 

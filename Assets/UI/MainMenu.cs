@@ -102,7 +102,7 @@ public class MainMenu : MonoBehaviour
 
     private void StartGame()
     {
-        SceneManager.LoadScene("TestingScene");
+        GameManager.Instance.LoadScene(1);
     }
 
     private void OpenSettings()
