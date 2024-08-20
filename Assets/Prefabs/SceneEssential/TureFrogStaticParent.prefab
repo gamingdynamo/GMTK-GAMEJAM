@@ -3585,6 +3585,11 @@ MonoBehaviour:
   frogColid: {fileID: 3953407702737394095}
   frogTongue: {fileID: 2573559936140634585}
   aimAssist: {fileID: 3305477591775864274}
+  audioJump:
+  - {fileID: 8300000, guid: 4c0a356686484fb4c87c6b199af52c76, type: 3}
+  audioFrogVoice:
+  - {fileID: 8300000, guid: 3d6498a9dab054448a8a037e6b1b0018, type: 3}
+  - {fileID: 8300000, guid: 77cc0cacdd0afb14db618af98a6c4024, type: 3}
 --- !u!54 &1362267348099469064
 Rigidbody:
   m_ObjectHideFlags: 0
