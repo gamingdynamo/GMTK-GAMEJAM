@@ -11,7 +11,7 @@ public class FrogGroundCheck : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Ground"))
+        if (other.CompareTag("Ground") || other.CompareTag("TonguableGround"))
         {
             onGround++;
             frogBehave.FrogOnGround(true);
@@ -20,7 +20,7 @@ public class FrogGroundCheck : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Ground"))
+        if (other.CompareTag("Ground") || other.CompareTag("TonguableGround"))
         {
             onGround--;
             if (onGround <= 0)

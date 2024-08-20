@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Ground
   - Tonguable
+  - FrogGroundCheck
+  - Frog
+  - TonguableGround
   layers:
   - Default
   - TransparentFX

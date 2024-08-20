@@ -15,20 +15,26 @@ MonoBehaviour:
   FrogWalkHeight: 0.3
   FrogWalkDistance: 0.4
   FrogWalkTimeInterval: 0.2
-  FrogWalkCoolDown: 0.1
+  FrogWalkCoolDown: 0.05
   FrogJumpLeaveGroundCoyoteTime: 0.08
   FrogJumpInputCoyoteTime: 0.08
   FrogMaxJumpTime: 0.5
   FrogJumpVerticleVelocity: 4
   FrogJumpForwardVelocity: 2
   FrogJumpFallControlVelocity: 5
-  FrogTongueAimDistance: 7
+  FrogTongueAimDistance: 5
   FrogTongueMaxLength: 5
   FrogTongueShootTime: 0.2
   FrogTongueHoldTime: 0.1
   FrogTongueRetrieveTime: 0.2
-  FrogTongueRadiusScale: 0.01
+  FrogTongueRadiusScale: 1
   AimAssistAngle: 20
+  AimAssistYOffset: 0.3
   AimAssistColliderNumber: 5
+  FrogScaleIncreaseAmount: 0.05
+  FrogJumpTimeIncreaseAmount: 0.02
+  FrogJumpYVelocityIncreaseAmount: 0.01
+  FrogJumpXZVelocityIncreaseAmount: 0.01
+  FrogTongueLengthIncreaseAmount: 0.1
   FrogHopAnimationSpeed: 2
   FrogJumpAnimationSpeed: 1

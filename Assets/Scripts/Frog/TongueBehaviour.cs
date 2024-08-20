@@ -12,10 +12,13 @@ public class TongueBehaviour : MonoBehaviour
 
     private Vector3 tongueEndPostion = Vector3.zero;
     private Tonguable tongueTarget = null;
+    private Tonguable tonguePullTarget = null;
     private FrogTongueState currTongueState = FrogTongueState.Resting;
 
     private float tongueStateTime = 0.0f;
     private float tongueT = 0.0f;
+
+    private const float TongueLength = 0.79f;
 
     private void Update()
     {
@@ -35,23 +38,30 @@ public class TongueBehaviour : MonoBehaviour
 
     private void TongueTransformChange()
     {
-        if (currTongueState == FrogTongueState.Holding) { return; }
         Vector3 endPos = (currTongueState == FrogTongueState.Retrieving ? tongueEndPostion : (tongueTarget == null ? tongueEndPostion : tongueTarget.transform.position));
-        float directionalT = (currTongueState == FrogTongueState.Shooting ? tongueT : 1.0f - tongueT);
+        float directionalT = (currTongueState == FrogTongueState.Holding ? 1.0f : (currTongueState == FrogTongueState.Shooting ? tongueT : 1.0f - tongueT));
 
         //Scale
-        float maxScale = 0.5f * Vector3.Distance(endPos, tongueStartTrans.position);
-        transform.localScale = new Vector3(FrogBehaviour.Instance.FrogScripObj.FrogTongueRadiusScale, Mathf.Lerp(0.0f, maxScale, directionalT), FrogBehaviour.Instance.FrogScripObj.FrogTongueRadiusScale);
+        float maxScale = Vector3.Distance(endPos, tongueStartTrans.position) / TongueLength;
+        transform.localScale = new Vector3(FrogBehaviour.Instance.FrogScripObj.FrogTongueRadiusScale, FrogBehaviour.Instance.FrogScripObj.FrogTongueRadiusScale, Mathf.Lerp(0.0f, maxScale, directionalT));
 
         //Position
-        transform.position = Vector3.Lerp(tongueStartTrans.position, endPos, directionalT * 0.5f);
-        if (currTongueState == FrogTongueState.Retrieving && tongueTarget != null)
-        {
-            tongueTarget.transform.position = Vector3.Lerp(tongueStartTrans.position, endPos, directionalT);
-        }
+        transform.position = Vector3.Lerp(tongueStartTrans.position, endPos, directionalT * 0.5f * TongueLength);
+        TonguableMovement(endPos, directionalT);
 
         //Rotation
-        transform.up = (endPos - tongueStartTrans.position).normalized;
+        transform.forward = (endPos - tongueStartTrans.position).normalized;
+    }
+
+    private void TonguableMovement(Vector3 endPos, float directionalT)
+    {
+        if (tonguePullTarget == null) { return; }
+        if (tonguePullTarget is HookTonguable) { return; }
+        tonguePullTarget.transform.position = Vector3.Lerp(tongueStartTrans.position, endPos, directionalT);
+        if (tonguePullTarget is PullTonguable && Vector3.Distance(transform.position, tonguePullTarget.transform.position) < (tonguePullTarget as PullTonguable).PullScriptObj.PullStopDistance)
+        {
+            tonguePullTarget = null;
+        }
     }
 
     private void NextTongueState()
@@ -63,27 +73,50 @@ public class TongueBehaviour : MonoBehaviour
             case FrogTongueState.Shooting:
                 tongueRend.enabled = true;
                 tongueStateTime = FrogBehaviour.Instance.FrogScripObj.FrogTongueShootTime;
+                if (tongueTarget != null)
+                {
+                    tongueTarget.TongueBehave = this;
+                }
                 break;
             case FrogTongueState.Holding:
                 tongueStateTime = FrogBehaviour.Instance.FrogScripObj.FrogTongueHoldTime;
+                if (tongueTarget != null)
+                {
+                    tongueTarget.GotTongued();
+                }
                 break;
             case FrogTongueState.Retrieving:
                 tongueStateTime = FrogBehaviour.Instance.FrogScripObj.FrogTongueRetrieveTime;
                 if (tongueTarget != null)
                 {
                     tongueEndPostion = tongueTarget.transform.position;
+                    HookMovement();
                 }
                 break;
             case FrogTongueState.Resting:
                 if (tongueTarget != null)
                 {
-                    Destroy(tongueTarget.gameObject);
+                    tongueTarget.GotRetrieved();
                 }
+                tongueTarget = null;
+                tonguePullTarget = null;
                 tongueStateTime = 0.0f;
                 tongueEndPostion = Vector3.zero;
                 tongueRend.enabled = false;
                 break;
         }
+    }
+
+    private void HookMovement()
+    {
+        if (!(tongueTarget is HookTonguable)) { return; }
+        HookTonguableScriptableObject scriptObj = (tongueTarget as HookTonguable).HookScriptObj;
+        FrogBehaviour.Instance.JumpAction(scriptObj.HookRushTime, scriptObj.HookRushVelocity * (tongueTarget.transform.position - transform.position).normalized);
+    }
+
+    public void SetTonguePullTarget(Tonguable pullTarget)
+    {
+        tonguePullTarget = pullTarget;
     }
 
     public void ShootTongue(Tonguable target)
@@ -94,7 +127,7 @@ public class TongueBehaviour : MonoBehaviour
 
     public void ShootTongue(Vector3 EndPosition)
     {
-        tongueEndPostion = FrogBehaviour.Instance.FrogScripObj.FrogTongueMaxLength * (EndPosition - tongueStartTrans.position).normalized + tongueStartTrans.position;
+        tongueEndPostion = FrogBehaviour.Instance.GetTongueLength() * (EndPosition - tongueStartTrans.position).normalized + tongueStartTrans.position;
         NextTongueState();
 
     }
