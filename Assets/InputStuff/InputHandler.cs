@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
@@ -22,6 +21,7 @@ public class InputHandler : MonoBehaviour
     /// </summary>
     /// */
     public Vector3 mousedelta;
+
     void Awake()
     {   
         if (Instance != null)
@@ -56,6 +56,7 @@ public class InputHandler : MonoBehaviour
         if (FrogBehaviour.Instance != null)
         {
             FrogBehaviour.Instance.FrogWalkStart(context.ReadValue<Vector2>().normalized);
+
         }
     }
 

@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     #region HUD
     [HideInInspector]public int FlyNeeded;
     [HideInInspector]public int FlyRequired;
+    [SerializeField]private AudioClip[] audioClips;
     private int flyCount;
     public int FlyCount
     {
@@ -19,6 +20,7 @@ public class GameManager : MonoBehaviour
         {
           
             flyCount = value;
+            SoundManager.Instance.PlayAudioAtPosition(audioClips[Random.Range(0, audioClips.Length)], Vector3.zero, 1, 0.2f, 0.2f);
             FlyRequired = FlyNeeded - flyCount;
             if (HUDHandler.Instance == null) { return; }
             HUDHandler.Instance.UpdateHUD();

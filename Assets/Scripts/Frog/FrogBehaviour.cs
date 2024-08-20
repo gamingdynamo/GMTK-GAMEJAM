@@ -57,6 +57,9 @@ public class FrogBehaviour : MonoBehaviour
     private int frogTongueLevel = 0;
     public int FrogTongueLevel { get {return frogTongueLevel; } }
 
+    [SerializeField] private AudioClip[] audioJump;
+    [SerializeField] private AudioClip[] audioFrogVoice;
+
     private void Start()
     {   
         if (Instance == null)
@@ -69,7 +72,7 @@ public class FrogBehaviour : MonoBehaviour
             Destroy(gameObject);
             return;
         }
-
+        StartCoroutine(nameof(PlayFrogVoice));
         WalkFormulaA = frogScripObj.FrogWalkHeight / (frogScripObj.FrogWalkDistance * frogScripObj.FrogWalkDistance * 0.25f);
         WalkFormulaC = frogScripObj.FrogWalkHeight;
         aimAssist.InitBoxColliders();
@@ -91,6 +94,17 @@ public class FrogBehaviour : MonoBehaviour
         FrogWalk();
         JumpUpdate();
         FrogWalkCheck();
+        PlayFrogVoice();
+    }
+
+    private IEnumerator PlayFrogVoice()
+    {
+        while(true){
+
+            yield return new WaitForSeconds(Random.Range(1,10));
+            SoundManager.Instance.PlayAudioAtPosition(audioFrogVoice[Random.Range(0,audioFrogVoice.Length)],Vector3.zero,1,0.2f,0.2f);
+        }
+        yield return null;
     }
 
     private void FrogFaceDirection(Vector2 dir)
@@ -199,6 +213,8 @@ public class FrogBehaviour : MonoBehaviour
     {
         jumpInputTimer = frogScripObj.FrogJumpInputCoyoteTime;
         if (!frogOnGround && leaveGroundTimer <= 0.0f) { return; }
+        SoundManager.Instance.PlayAudioAtPosition(audioJump[Random.Range(0, audioJump.Length)], Vector3.zero, 1, 0.1f, 0.1f);
+
         JumpAction();
     }
 

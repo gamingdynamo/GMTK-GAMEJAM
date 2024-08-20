@@ -7,7 +7,7 @@ public class Tonguable : MonoBehaviour
     private TongueBehaviour tongueBehave;
     public TongueBehaviour TongueBehave {  get { return tongueBehave; } set { tongueBehave = value; } }
     
-
+    
     public virtual void GotTongued()
     {
         if (TongueBehave == null) { return; }
