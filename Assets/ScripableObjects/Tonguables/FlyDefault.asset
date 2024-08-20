@@ -19,7 +19,7 @@ MonoBehaviour:
   RandomPosMaxNumber: 10
   RandomPosReachTime: 0.15
   RandomPosMinDistance: 0.2
-  RandomPosMaxDistance: 0.7
-  RandomPosMaxAngle: 80
+  RandomPosMaxDistance: 0.3
+  RandomPosMaxAngle: 60
   RandomPosPauseTime: 0.05
   FlyRestTime: 6

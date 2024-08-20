@@ -2,18 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class FrogTongueAssist : MonoBehaviour
 {
     [SerializeField]
     private RectTransform lookSignTrans;
+    [SerializeField]
+    private Image[] lookSignImages;
+    [SerializeField]
+    private Transform tongueStartTrans;
 
     private BoxCollider[] colids;
     private Transform closestTarget = null;
 
     private void OnTriggerStay(Collider other)
     {
-        if (!other.CompareTag("Tonguable")) { return; }
+        if (!other.CompareTag("Tonguable") && !other.CompareTag("TonguableGround")) { return; }
         if (closestTarget == null)
         {
             closestTarget = other.transform;
@@ -35,7 +40,7 @@ public class FrogTongueAssist : MonoBehaviour
         }
         RaycastHit hit;
         if (closestTarget != null 
-            && Physics.Raycast(transform.position, (closestTarget.position - transform.position).normalized, out hit, FrogBehaviour.Instance.GetTongueLength())
+            && Physics.Raycast(tongueStartTrans.position, (closestTarget.position - transform.position).normalized, out hit, FrogBehaviour.Instance.GetTongueLength())
             && hit.transform == closestTarget)
         {
             lookSignTrans.gameObject.SetActive(true);
@@ -82,6 +87,21 @@ public class FrogTongueAssist : MonoBehaviour
     private void SetLookSignPosition()
     {
         lookSignTrans.position = FrogBehaviour.Instance.CameraMain.WorldToScreenPoint(closestTarget.position);
+        Tonguable targetTonguable = closestTarget.GetComponent<Tonguable>();
+        Color targetColor = Color.white;
+        switch (targetTonguable)
+        {
+            case PushTonguable:
+                targetColor = (targetTonguable as PushTonguable).PushScriptObj.PushRequiredLevel > FrogBehaviour.Instance.FrogTongueLevel ? Color.red : Color.green;    
+                break;
+            case PullTonguable:
+                targetColor = (targetTonguable as PullTonguable).PullScriptObj.PullRequiredLevel > FrogBehaviour.Instance.FrogTongueLevel ? Color.red : Color.green;
+                break;
+        }
+        for (int i = 0; i < lookSignImages.Length; i++)
+        {
+            lookSignImages[i].color = targetColor;
+        }
     }
     
     private bool InAngles(Transform trans)
