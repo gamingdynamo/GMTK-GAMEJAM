@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: FrogBehaviourScriptableObject
   m_EditorClassIdentifier: 
   FrogWalkHeight: 0.3
-  FrogWalkDistance: 0.4
+  FrogWalkDistance: 0.5
   FrogWalkTimeInterval: 0.2
   FrogWalkCoolDown: 0.05
   FrogJumpLeaveGroundCoyoteTime: 0.08
@@ -28,13 +28,12 @@ MonoBehaviour:
   FrogTongueHoldTime: 0.1
   FrogTongueRetrieveTime: 0.2
   FrogTongueRadiusScale: 1
-  AimAssistAngle: 20
-  AimAssistYOffset: 0.3
+  AimAssistAngle: 40
+  AimAssistYOffset: 0.5
   AimAssistColliderNumber: 5
   FrogScaleIncreaseAmount: 0.05
   FrogJumpTimeIncreaseAmount: 0.02
   FrogJumpYVelocityIncreaseAmount: 0.01
   FrogJumpXZVelocityIncreaseAmount: 0.01
   FrogTongueLengthIncreaseAmount: 0.1
-  FrogHopAnimationSpeed: 2
-  FrogJumpAnimationSpeed: 1
+  JumpAnimationStopTime: 0.15
