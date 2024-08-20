@@ -27,7 +27,7 @@ MonoBehaviour:
   FrogTongueShootTime: 0.2
   FrogTongueHoldTime: 0.1
   FrogTongueRetrieveTime: 0.2
-  FrogTongueRadiusScale: 0.01
+  FrogTongueRadiusScale: 1
   AimAssistAngle: 20
   AimAssistYOffset: 0.3
   AimAssistColliderNumber: 5

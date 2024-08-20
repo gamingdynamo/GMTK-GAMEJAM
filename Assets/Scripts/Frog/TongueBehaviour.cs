@@ -18,6 +18,8 @@ public class TongueBehaviour : MonoBehaviour
     private float tongueStateTime = 0.0f;
     private float tongueT = 0.0f;
 
+    private const float TongueLength = 0.79f;
+
     private void Update()
     {
         TongueMovement();
@@ -36,20 +38,19 @@ public class TongueBehaviour : MonoBehaviour
 
     private void TongueTransformChange()
     {
-        if (currTongueState == FrogTongueState.Holding) { return; }
         Vector3 endPos = (currTongueState == FrogTongueState.Retrieving ? tongueEndPostion : (tongueTarget == null ? tongueEndPostion : tongueTarget.transform.position));
-        float directionalT = (currTongueState == FrogTongueState.Shooting ? tongueT : 1.0f - tongueT);
+        float directionalT = (currTongueState == FrogTongueState.Holding ? 1.0f : (currTongueState == FrogTongueState.Shooting ? tongueT : 1.0f - tongueT));
 
         //Scale
-        float maxScale = 0.5f * Vector3.Distance(endPos, tongueStartTrans.position);
-        transform.localScale = new Vector3(FrogBehaviour.Instance.FrogScripObj.FrogTongueRadiusScale, Mathf.Lerp(0.0f, maxScale, directionalT), FrogBehaviour.Instance.FrogScripObj.FrogTongueRadiusScale);
+        float maxScale = Vector3.Distance(endPos, tongueStartTrans.position) / TongueLength;
+        transform.localScale = new Vector3(FrogBehaviour.Instance.FrogScripObj.FrogTongueRadiusScale, FrogBehaviour.Instance.FrogScripObj.FrogTongueRadiusScale, Mathf.Lerp(0.0f, maxScale, directionalT));
 
         //Position
-        transform.position = Vector3.Lerp(tongueStartTrans.position, endPos, directionalT * 0.5f);
+        transform.position = Vector3.Lerp(tongueStartTrans.position, endPos, directionalT * 0.5f * TongueLength);
         TonguableMovement(endPos, directionalT);
 
         //Rotation
-        transform.up = (endPos - tongueStartTrans.position).normalized;
+        transform.forward = (endPos - tongueStartTrans.position).normalized;
     }
 
     private void TonguableMovement(Vector3 endPos, float directionalT)
