@@ -390,4 +390,9 @@ public class FrogBehaviour : MonoBehaviour
         frogColid.enabled = false;
 
     }
+
+    public void SetLockOnActive(bool tF)
+    {
+        aimAssist.SetLockOnActive(tF);
+    }
 }

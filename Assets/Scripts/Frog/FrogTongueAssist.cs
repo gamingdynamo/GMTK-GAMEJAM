@@ -34,6 +34,7 @@ public class FrogTongueAssist : MonoBehaviour
 
     private void Update()
     {
+        if (Time.timeScale == 0.0f) { return; }
         if (!InAngles(closestTarget))
         {
             closestTarget = null;
@@ -43,15 +44,20 @@ public class FrogTongueAssist : MonoBehaviour
             && Physics.Raycast(transform.position, (closestTarget.position - transform.position).normalized, out hit, FrogBehaviour.Instance.GetTongueLength())
             && hit.transform == closestTarget)
         {
-            lookSignTrans.gameObject.SetActive(true);
+            SetLockOnActive(true);
             SetLookSignPosition();
         }
         else
         {
-            lookSignTrans.gameObject.SetActive(false);
+            SetLockOnActive(false);
             closestTarget = null;
         }
 
+    }
+
+    public void SetLockOnActive(bool tF)
+    {
+        lookSignTrans.gameObject.SetActive(tF);
     }
 
     public void SetAimAssistRotation(Vector3 forwardDir)
