@@ -31,10 +31,10 @@ MonoBehaviour:
   AimAssistAngle: 20
   AimAssistYOffset: 0.3
   AimAssistColliderNumber: 5
-  FrogScaleIncreaseAmount: 0.1
-  FrogJumpTimeIncreaseAmount: 0.05
-  FrogJumpYVelocityIncreaseAmount: 0.1
-  FrogJumpXZVelocityIncreaseAmount: 0.1
-  FrogTongueLengthIncreaseAmount: 0.3
+  FrogScaleIncreaseAmount: 0.05
+  FrogJumpTimeIncreaseAmount: 0.02
+  FrogJumpYVelocityIncreaseAmount: 0.01
+  FrogJumpXZVelocityIncreaseAmount: 0.01
+  FrogTongueLengthIncreaseAmount: 0.1
   FrogHopAnimationSpeed: 2
   FrogJumpAnimationSpeed: 1
