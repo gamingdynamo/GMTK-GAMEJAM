@@ -5,6 +5,7 @@
         <ui:VisualElement name="button-container" class="button-container" style="display: flex;">
             <ui:Button text="Start" name="start-button" class="menu-button" />
             <ui:Button text="Settings" name="settings-button" class="menu-button" />
+            <ui:Button text="Credits" name="credits-button" class="menu-button" />
             <ui:Button text="Exit" name="exit-button" class="menu-button" />
         </ui:VisualElement>
         <ui:VisualElement name="option-panel" class="option-panel" style="display: none;">
