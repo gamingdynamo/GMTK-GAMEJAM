@@ -1417,6 +1417,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2082381314}
   m_LocalEulerAnglesHint: {x: -29.892, y: 11.031, z: 0}
+--- !u!1 &364154470 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6580031494924129079, guid: f47c0d428cd3d644b823eff9a7c38203, type: 3}
+  m_PrefabInstance: {fileID: 910194238419618282}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &385063348
 GameObject:
   m_ObjectHideFlags: 0
@@ -5102,6 +5107,27 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4049628608725541302, guid: f47c0d428cd3d644b823eff9a7c38203, type: 3}
   m_PrefabInstance: {fileID: 910194238419618282}
   m_PrefabAsset: {fileID: 0}
+--- !u!135 &1405183268
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 364154470}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1409047101
 GameObject:
   m_ObjectHideFlags: 0
@@ -7639,7 +7665,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4049628608725541302, guid: f47c0d428cd3d644b823eff9a7c38203, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 63.821
+      value: 63.32
       objectReference: {fileID: 0}
     - target: {fileID: 4049628608725541302, guid: f47c0d428cd3d644b823eff9a7c38203, type: 3}
       propertyPath: m_LocalPosition.y
@@ -7647,7 +7673,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4049628608725541302, guid: f47c0d428cd3d644b823eff9a7c38203, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 116.271
+      value: 121.85
       objectReference: {fileID: 0}
     - target: {fileID: 4049628608725541302, guid: f47c0d428cd3d644b823eff9a7c38203, type: 3}
       propertyPath: m_LocalRotation.w
@@ -7681,10 +7707,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: MugCube
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 6623150329774019587, guid: f47c0d428cd3d644b823eff9a7c38203, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+    - target: {fileID: 7417257020714778098, guid: f47c0d428cd3d644b823eff9a7c38203, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 7417257020714778098, guid: f47c0d428cd3d644b823eff9a7c38203, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6580031494924129079, guid: f47c0d428cd3d644b823eff9a7c38203, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1405183268}
   m_SourcePrefab: {fileID: 100100000, guid: f47c0d428cd3d644b823eff9a7c38203, type: 3}
 --- !u!1001 &3258977837497806597
 PrefabInstance:
